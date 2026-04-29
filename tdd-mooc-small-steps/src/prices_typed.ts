@@ -30,6 +30,7 @@ function createApp(database: Database) {
       return new Date(dateString);
     }
   }
+  function parsePlainDate(dateString: string | undefined): Temporal.PlainDate | undefined { if (dateString) { return Temporal.PlainDate.from(dateString); } }
 
   function calculateCost(age: number | undefined, type: string, date: Date | undefined, baseCost: number) {
     if (type === "night") {
