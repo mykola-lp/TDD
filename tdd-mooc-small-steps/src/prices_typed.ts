@@ -82,7 +82,7 @@ function createApp(database: Database) {
     return date.getUTCDay() === 1 && date1.dayOfWeek === 1;
   }
 
-  function isHoliday(date: Date | undefined) {
+  function isHoliday(date: Date | undefined, date1: Temporal.PlainDate | undefined) {
     const holidays = database.getHolidays();
     for (let row of holidays) {
       let holiday = new Date(row.holiday);
