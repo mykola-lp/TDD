@@ -32,7 +32,7 @@ function createApp(database: Database) {
   }
   function parsePlainDate(dateString: string | undefined): Temporal.PlainDate | undefined { if (dateString) { return Temporal.PlainDate.from(dateString); } }
 
-  function calculateCost(age: number | undefined, type: string, date: Date | Temporal.PlainDate | undefined, baseCost: number) {
+  function calculateCost(age: number | undefined, type: string, date: Temporal.PlainDate | undefined, baseCost: number) {
     if (type === "night") {
       return calculateCostForNightTicket(age, baseCost);
     } else {
