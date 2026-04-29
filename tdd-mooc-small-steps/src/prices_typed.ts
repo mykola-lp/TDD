@@ -79,7 +79,7 @@ function createApp(database: Database) {
   }
 
   function isMonday(date: Date | Temporal.PlainDate, date1: Temporal.PlainDate) {
-    return date.getUTCDay() === 1 && date1.dayOfWeek === 1;
+    return date1.dayOfWeek === 1;
   }
 
   function isHoliday(date: Temporal.PlainDate | undefined) {
