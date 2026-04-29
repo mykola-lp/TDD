@@ -70,7 +70,7 @@ function createApp(database: Database) {
     return Math.ceil(baseCost * (1 - reduction / 100));
   }
 
-  function calculateReduction(date: Date | undefined, date1: Temporal.PlainDate | undefined) {
+  function calculateReduction(date: Date | Temporal.PlainDate | undefined, date1: Temporal.PlainDate | undefined) {
     let reduction = 0;
     if (date1 && isMonday(date, date1) && !isHoliday(date1)) {
       reduction = 35;
