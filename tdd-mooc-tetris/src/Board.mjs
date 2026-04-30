@@ -17,4 +17,10 @@ export class Board {
 
     return res;
   }
+
+  drop(symbol) {
+    this.symbol = symbol;
+    this.x = 1;
+    this.y = 0;
+  }
 }
