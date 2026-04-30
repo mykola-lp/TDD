@@ -8,6 +8,13 @@ export class Board {
   }
 
   toString() {
-    return "TODO";
+    let res = "";
+
+    for (let i = 0; i < this.height; i++) {
+      res += ".".repeat(this.width);
+      res += "\n";
+    }
+
+    return res;
   }
 }
