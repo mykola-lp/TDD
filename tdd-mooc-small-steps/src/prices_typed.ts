@@ -81,7 +81,7 @@ function createApp(database: Database) {
     return date.getUTCDay() === 1;
   }
 
-  function isHoliday(date: Date | Temporal.PlainDate | undefined) {
+  function isHoliday(date: Temporal.PlainDate | undefined) {
     const holidays = database.getHolidays();
     for (let row of holidays) {
       let holiday = Temporal.PlainDate.from(row.holiday);
