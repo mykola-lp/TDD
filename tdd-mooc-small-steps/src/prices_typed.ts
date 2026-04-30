@@ -90,7 +90,7 @@ function createApp(database: Database) {
       if (
         date1 &&
         date1.equals(holiday1) &&
-        date.getDate() === holiday.getDate()
+        date1.equals(holiday1)
       ) {
         return true;
       }
