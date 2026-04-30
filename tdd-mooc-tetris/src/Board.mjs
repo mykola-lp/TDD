@@ -7,6 +7,12 @@ export class Board {
     this.height = height;
   }
 
+  drop(symbol) {
+    this.symbol = symbol;
+    this.x = 1;
+    this.y = 0;
+  }
+
   toString() {
     let res = "";
 
@@ -22,11 +28,5 @@ export class Board {
     }
 
     return res;
-  }
-
-  drop(symbol) {
-    this.symbol = symbol;
-    this.x = 1;
-    this.y = 0;
   }
 }
