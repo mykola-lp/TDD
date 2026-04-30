@@ -10,8 +10,14 @@ export class Board {
   toString() {
     let res = "";
 
-    for (let i = 0; i < this.height; i++) {
-      res += ".".repeat(this.width);
+    for (let y = 0; y < this.height; y++) {
+      for (let x = 0; x < this.width; x++) {
+        if (x === this.x && y === this.y) {
+          res += this.symbol;
+        } else {
+          res += ".";
+        }
+      }
       res += "\n";
     }
 
