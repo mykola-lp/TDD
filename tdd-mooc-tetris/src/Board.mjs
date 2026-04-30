@@ -13,6 +13,10 @@ export class Board {
     this.y = 0;
   }
 
+  tick() {
+    this.y += 1;
+  }
+
   toString() {
     let res = "";
 
