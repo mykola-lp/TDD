@@ -8,6 +8,10 @@ export class Board {
   }
 
   drop(symbol) {
+    if (this.symbol) {
+      throw new Error("already falling");
+    }
+
     this.symbol = symbol;
     this.x = 1;
     this.y = 0;
