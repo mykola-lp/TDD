@@ -2,6 +2,9 @@ export class Board {
   width;
   height;
   falling = false;
+  landedSymbol;
+  landedX;
+  landedY;
 
   constructor(width, height) {
     this.width = width;
@@ -21,9 +24,13 @@ export class Board {
 
   tick() {
     if (!this.falling) return;
+  
     if (this.y < this.height - 1) {
       this.y += 1;
     } else {
+      this.landedSymbol = this.symbol;
+      this.landedX = this.x;
+      this.landedY = this.y;
       this.falling = false;
     }
   }
@@ -39,6 +46,8 @@ export class Board {
       for (let x = 0; x < this.width; x++) {
         if (x === this.x && y === this.y) {
           res += this.symbol;
+        } else if (x === this.landedX && y === this.landedY) {
+          res += this.landedSymbol;
         } else {
           res += ".";
         }
