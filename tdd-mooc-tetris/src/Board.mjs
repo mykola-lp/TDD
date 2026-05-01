@@ -1,22 +1,24 @@
 export class Board {
   width;
   height;
-  falling = false;
-  landedSymbol;
+
+  landedBlock;
   landedX;
   landedY;
+
+  falling = false;
 
   constructor(width, height) {
     this.width = width;
     this.height = height;
   }
 
-  drop(symbol) {
+  drop(block) {
     if (this.falling) {
       throw new Error("already falling");
     }
 
-    this.symbol = symbol;
+    this.currentBlock = block;
     this.x = 1;
     this.y = 0;
     this.falling = true;
@@ -28,7 +30,7 @@ export class Board {
     if (this.y < this.height - 1 && !(this.x === this.landedX && this.y + 1 === this.landedY)) {
       this.y += 1;
     } else if (this.y === this.height - 1) {
-      this.landedSymbol = this.symbol;
+      this.landedBlock = this.currentBlock;
       this.landedX = this.x;
       this.landedY = this.y;
       this.falling = false;
@@ -47,9 +49,9 @@ export class Board {
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
         if (x === this.x && y === this.y) {
-          res += this.symbol;
+          res += this.currentBlock;
         } else if (x === this.landedX && y === this.landedY) {
-          res += this.landedSymbol;
+          res += this.landedBlock;
         } else {
           res += ".";
         }
