@@ -21,6 +21,10 @@ export class Board {
     this.y += 1;
   }
 
+  hasFalling() {
+    return this.symbol !== undefined;
+  }
+
   toString() {
     let res = "";
 
