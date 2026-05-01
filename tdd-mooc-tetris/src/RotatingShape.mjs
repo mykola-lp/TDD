@@ -23,11 +23,16 @@ export class RotatingShape {
   }
 
   rotateRight() {
-    return new RotatingShape([
-      [this.grid[2][0], this.grid[1][0], this.grid[0][0]],
-      [this.grid[2][1], this.grid[1][1], this.grid[0][1]],
-      [this.grid[2][2], this.grid[1][2], this.grid[0][2]],
-    ]);
+    const size = this.grid.length;
+    const rotated = [];
+
+    for (let y = 0; y < size; y++) {
+      rotated[y] = [];
+      for (let x = 0; x < size; x++) {
+        rotated[y][x] = this.grid[size - 1 - x][y];
+      }
+    }
+    return new RotatingShape(rotated);
   }
 
   toString() {
