@@ -1,6 +1,7 @@
 export class Board {
   width;
   height;
+  falling = false;
 
   constructor(width, height) {
     this.width = width;
@@ -8,21 +9,27 @@ export class Board {
   }
 
   drop(symbol) {
-    if (this.symbol) {
+    if (this.falling) {
       throw new Error("already falling");
     }
 
     this.symbol = symbol;
     this.x = 1;
     this.y = 0;
+    this.falling = true;
   }
 
   tick() {
-    this.y += 1;
+    if (!this.falling) return;
+    if (this.y < this.height - 1) {
+      this.y += 1;
+    } else {
+      this.falling = false;
+    }
   }
 
   hasFalling() {
-    return this.symbol !== undefined;
+    return this.falling;
   }
 
   toString() {
