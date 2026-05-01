@@ -24,13 +24,15 @@ export class Board {
 
   tick() {
     if (!this.falling) return;
-  
-    if (this.y < this.height - 1) {
+
+    if (this.y < this.height - 1 && !(this.x === this.landedX && this.y + 1 === this.landedY)) {
       this.y += 1;
-    } else {
+    } else if (this.y === this.height - 1) {
       this.landedSymbol = this.symbol;
       this.landedX = this.x;
       this.landedY = this.y;
+      this.falling = false;
+    } else {
       this.falling = false;
     }
   }
