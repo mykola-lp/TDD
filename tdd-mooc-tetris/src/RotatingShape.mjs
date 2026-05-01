@@ -20,10 +20,12 @@ export class RotatingShape {
 
     for (let y = 0; y < size; y++) {
       rotated[y] = [];
+
       for (let x = 0; x < size; x++) {
         rotated[y][x] = this.grid[x][size - 1 - y];
       }
     }
+
     return new RotatingShape(rotated);
   }
 
@@ -33,10 +35,12 @@ export class RotatingShape {
 
     for (let y = 0; y < size; y++) {
       rotated[y] = [];
+  
       for (let x = 0; x < size; x++) {
         rotated[y][x] = this.grid[size - 1 - x][y];
       }
     }
+
     return new RotatingShape(rotated);
   }
 
