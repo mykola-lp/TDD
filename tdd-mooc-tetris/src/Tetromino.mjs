@@ -1,7 +1,6 @@
 import { RotatingShape } from "./RotatingShape.mjs";
 
 export class Tetromino {
-
   constructor(orientations, index = 0) {
     this.orientations = orientations;
     this.index = index;
@@ -59,5 +58,12 @@ export class Tetromino {
     .....
     .....`,
     2
+  );
+
+  static O_SHAPE = Tetromino.fromString(
+    `.OO
+    .OO
+    ...`,
+    1
   );
 }
