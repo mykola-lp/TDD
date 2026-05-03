@@ -43,6 +43,14 @@ describe("The T shape", () => {
     );
   });
 
+  test("can be rotated right/clockwise T", () => {
+    expect(shapeT.rotateRightOrientations().toStringOrientations()).to.equalShape(
+      `.T.
+       .TT
+       .T.`
+    );
+  });
+
   test("can be rotated left/counter-clockwise", () => {
     expect(shape.rotateLeft().toString()).to.equalShape(
       `.T.
