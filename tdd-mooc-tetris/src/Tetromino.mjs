@@ -29,6 +29,10 @@ export class Tetromino {
     return this.shape.toString();
   }
 
+  toStringOrientations() {
+    return this.orientations[this.index].toString();
+  }
+
   rotateRight() {
     return new Tetromino(this.shape.rotateRight());
   }
