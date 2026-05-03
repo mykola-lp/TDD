@@ -41,7 +41,7 @@ export class Tetromino {
     if (nextIndex < 0) {
       nextIndex = count - 1;
     }
-    
+
     return new Tetromino(this.orientations, nextIndex);
   }
 
@@ -50,5 +50,14 @@ export class Tetromino {
     TTT
     ...`,
     4
+  );
+
+  static I_SHAPE = Tetromino.fromString(
+    `.....
+    .....
+    IIII.
+    .....
+    .....`,
+    2
   );
 }
