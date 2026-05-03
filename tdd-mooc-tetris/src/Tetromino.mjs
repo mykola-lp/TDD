@@ -15,6 +15,16 @@ export class Tetromino {
     this.index = index;
   }
 
+  static fromString(str, orientationCount) {
+    const orientations = [];
+    let shape = RotatingShape.fromString(str);
+    for (let i = 0; i < orientationCount; i++) {
+      orientations.push(shape);
+      shape = shape.rotateRight();
+    }
+    return new Tetromino(orientations[0], orientations, 0);
+  }
+
   toString() {
     return this.shape.toString();
   }
