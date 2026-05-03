@@ -9,8 +9,10 @@ export class Tetromino {
     )
   );
 
-  constructor(shape) {
+  constructor(shape, orientations = [shape], index = 0) {
     this.shape = shape;
+    this.orientations = orientations;
+    this.index = index;
   }
 
   toString() {
