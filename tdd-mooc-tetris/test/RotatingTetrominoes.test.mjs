@@ -59,6 +59,15 @@ describe("The T shape", () => {
     );
   });
 
+
+  test("can be rotated left/counter-clockwise", () => {
+    expect(shapeT.rotateLeftOrientations().toStringOrientations()).to.equalShape(
+      `.T.
+       TT.
+       .T.`
+    );
+  });
+
   test("has 4 distinct orientations", () => {
     expect(distinctOrientations(shape).size).to.equal(4);
   });
