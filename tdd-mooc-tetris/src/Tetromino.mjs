@@ -40,4 +40,11 @@ export class Tetromino {
   rotateLeft() {
     return new Tetromino(this.shape.rotateLeft());
   }
+
+  static T_SHAPE_ORIENTATIONS = Tetromino.fromString(
+    `.T.
+    TTT
+    ...`,
+    4
+  );
 }
