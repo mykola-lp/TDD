@@ -2,8 +2,7 @@ import { RotatingShape } from "./RotatingShape.mjs";
 
 export class Tetromino {
 
-  constructor(shape, orientations = [shape], index = 0) {
-    this.shape = shape;
+  constructor(orientations, index = 0) {
     this.orientations = orientations;
     this.index = index;
   }
@@ -11,11 +10,13 @@ export class Tetromino {
   static fromString(str, orientationCount) {
     const orientations = [];
     let shape = RotatingShape.fromString(str);
+
     for (let i = 0; i < orientationCount; i++) {
       orientations.push(shape);
       shape = shape.rotateRight();
     }
-    return new Tetromino(orientations[0], orientations, 0);
+
+    return new Tetromino(orientations, 0);
   }
 
   toString() {
@@ -29,7 +30,8 @@ export class Tetromino {
     if (nextIndex === count) {
       nextIndex = 0;
     }
-    return new Tetromino(this.orientations[nextIndex], this.orientations, nextIndex);
+
+    return new Tetromino(this.orientations, nextIndex);
   }
 
   rotateLeft() {
@@ -39,7 +41,8 @@ export class Tetromino {
     if (nextIndex < 0) {
       nextIndex = count - 1;
     }
-    return new Tetromino(this.orientations[nextIndex], this.orientations, nextIndex);
+    
+    return new Tetromino(this.orientations, nextIndex);
   }
 
   static T_SHAPE = Tetromino.fromString(
