@@ -224,4 +224,22 @@ describe("Falling tetrominoes", () => {
       ..........`
     );
   });
+
+  test("rotating changes only the falling tetromino", () => {
+    board.landedBlock = "X";
+    board.landedX = 0;
+    board.landedY = 5;
+
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateRight();
+
+    expect(board.toString()).to.equalShape(
+      `....T.....
+      ....TT....
+      ....T.....
+      ..........
+      ..........
+      X.........`
+    );
+  });
 });
