@@ -55,7 +55,11 @@ export class Board {
   }
 
   moveRight() {
-    this.x += 1;
+    const blockWidth = this.getWidth(this.currentBlock);
+
+    if (this.x + blockWidth < this.width) {
+      this.x += 1;
+    }
   }
 
   hasFalling() {
