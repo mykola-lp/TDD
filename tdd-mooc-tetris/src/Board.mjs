@@ -18,8 +18,10 @@ export class Board {
       throw new Error("already falling");
     }
 
+    const rows = this.getRows(block);
+
     this.currentBlock = block;
-    this.x = 1;
+    this.x = Math.floor((this.width - rows[0].length) / 2);
     this.y = 0;
     this.falling = true;
   }
