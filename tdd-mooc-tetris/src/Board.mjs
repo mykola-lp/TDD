@@ -52,6 +52,10 @@ export class Board {
     this.x -= 1;
   }
 
+  moveRight() {
+    this.x += 1;
+  }
+
   hasFalling() {
     return this.falling;
   }
