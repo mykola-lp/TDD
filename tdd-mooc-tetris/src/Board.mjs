@@ -29,9 +29,12 @@ export class Board {
   tick() {
     if (!this.falling) return;
 
-    if (this.y < this.height - 1 && !(this.x === this.landedX && this.y + 1 === this.landedY)) {
+    const blockHeight = this.getHeight(this.currentBlock);
+    const bottomY = this.y + blockHeight;
+    
+    if (bottomY < this.height && !(this.x === this.landedX && this.y + 1 === this.landedY)) {
       this.y += 1;
-    } else if (this.y === this.height - 1) {
+    } else if (bottomY === this.height) {
       this.landedBlock = this.currentBlock;
       this.landedX = this.x;
       this.landedY = this.y;
