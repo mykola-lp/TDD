@@ -51,24 +51,24 @@ export class Tetromino {
 
   static T_SHAPE = Tetromino.fromString(
     `.T.
-    TTT
-    ...`,
+     TTT
+     ...`,
     4
   );
 
   static I_SHAPE = Tetromino.fromString(
     `.....
-    .....
-    IIII.
-    .....
-    .....`,
+     .....
+     IIII.
+     .....
+     .....`,
     2
   );
 
   static O_SHAPE = Tetromino.fromString(
     `.OO
-    .OO
-    ...`,
+     .OO
+     ...`,
     1
   );
 }
