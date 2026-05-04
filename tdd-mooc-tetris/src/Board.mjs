@@ -65,6 +65,14 @@ export class Board {
     }
   }
 
+  rotateRight() {
+    if (!this.falling) {
+      return;
+    }
+
+    this.currentBlock = this.currentBlock.rotateRight();
+  }
+
   hasFalling() {
     return this.falling;
   }
