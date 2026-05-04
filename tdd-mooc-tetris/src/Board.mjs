@@ -47,13 +47,18 @@ export class Board {
 
   toString() {
     let res = "";
+    const currentRows = this.getRows(this.currentBlock);
+    const landedRows = this.getRows(this.landedBlock);
 
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
-        if (x === this.x && y === this.y) {
-          res += this.currentBlock;
-        } else if (x === this.landedX && y === this.landedY) {
-          res += this.landedBlock;
+        const current = this.getCell(currentRows, this.x, this.y, x, y);
+        const landed = this.getCell(landedRows, this.landedX, this.landedY, x, y);
+
+        if (current !== ".") {
+          res += current;
+        } else if (landed !== ".") {
+          res += landed;
         } else {
           res += ".";
         }
@@ -74,6 +79,7 @@ export class Board {
     }
     return rows;
   }
+
   getCell(rows, blockX, blockY, x, y) {
     const rowIndex = y - blockY;
     const columnIndex = x - blockX;
