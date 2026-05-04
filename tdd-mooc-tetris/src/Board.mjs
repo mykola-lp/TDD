@@ -57,7 +57,7 @@ export class Board {
   moveRight() {
     const blockWidth = this.getWidth(this.currentBlock);
 
-    if (this.x + blockWidth < this.width) {
+    if (this.x + blockWidth < this.width && !this.wouldHitLandedBlockAt(this.x + 1, this.y)) {
       this.x += 1;
     }
   }
