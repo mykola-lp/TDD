@@ -103,4 +103,26 @@ export class Board {
     }
     return 0;
   }
+
+  wouldHitLandedBlock() {
+    const currentRows = this.getRows(this.currentBlock);
+    const landedRows = this.getRows(this.landedBlock);
+  
+    for (let row = 0; row < currentRows.length; row++) {
+      for (let column = 0; column < currentRows[row].length; column++) {
+        const currentCell = currentRows[row][column];
+
+        if (currentCell === ".") continue;
+
+        const boardX = this.x + column;
+        const boardY = this.y + 1 + row;
+
+        const landedCell = this.getCell(landedRows, this.landedX, this.landedY, boardX, boardY);
+
+        if (landedCell !== ".") return true;
+      }
+    }
+
+    return false;
+  }
 }
