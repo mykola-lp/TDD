@@ -49,7 +49,9 @@ export class Board {
   }
 
   moveLeft() {
-    this.x -= 1;
+    if (this.x > 0) {
+      this.x -= 1;
+    }
   }
 
   moveRight() {
