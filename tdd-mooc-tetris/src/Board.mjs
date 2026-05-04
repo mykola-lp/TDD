@@ -18,10 +18,8 @@ export class Board {
       throw new Error("already falling");
     }
 
-    const rows = this.getRows(block);
-
     this.currentBlock = block;
-    this.x = Math.floor((this.width - rows[0].length) / 2);
+    this.x = Math.floor((this.width - this.getWidth(block)) / 2);
     this.y = 0;
     this.falling = true;
   }
@@ -31,7 +29,7 @@ export class Board {
 
     const blockHeight = this.getHeight(this.currentBlock);
     const bottomY = this.y + blockHeight;
-    
+
     const hitsLandedBlock = this.wouldHitLandedBlock();
 
     if (bottomY < this.height && !hitsLandedBlock) {
@@ -94,6 +92,14 @@ export class Board {
     const cell = row[columnIndex];
     if (!cell) return ".";
     return cell;
+  }
+
+  getWidth(block) {
+    const rows = this.getRows(block);
+    if (rows.length === 0) {
+      return 0;
+    }
+    return rows[0].length;
   }
 
   getHeight(block) {
