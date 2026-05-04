@@ -48,6 +48,10 @@ export class Board {
     this.tick();
   }
 
+  moveLeft() {
+    this.x -= 1;
+  }
+
   hasFalling() {
     return this.falling;
   }
