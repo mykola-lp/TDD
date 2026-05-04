@@ -49,7 +49,7 @@ export class Board {
   }
 
   moveLeft() {
-    if (this.x > 0) {
+    if (this.x > 0 && !this.wouldHitLandedBlockAt(this.x - 1, this.y)) {
       this.x -= 1;
     }
   }
@@ -140,18 +140,21 @@ export class Board {
   }
 
   wouldHitLandedBlock() {
+    return this.wouldHitLandedBlockAt(this.x, this.y + 1);
+  }
+
+  wouldHitLandedBlockAt(nextX, nextY) {
     const currentRows = this.getRows(this.currentBlock);
     const landedRows = this.getRows(this.landedBlock);
-  
+
     for (let row = 0; row < currentRows.length; row++) {
       for (let column = 0; column < currentRows[row].length; column++) {
         const currentCell = currentRows[row][column];
 
         if (currentCell === ".") continue;
 
-        const boardX = this.x + column;
-        const boardY = this.y + 1 + row;
-
+        const boardX = nextX + column;
+        const boardY = nextY + row;
         const landedCell = this.getCell(landedRows, this.landedX, this.landedY, boardX, boardY);
 
         if (landedCell !== ".") return true;

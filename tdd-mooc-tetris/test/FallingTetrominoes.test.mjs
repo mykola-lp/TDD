@@ -154,4 +154,22 @@ describe("Falling tetrominoes", () => {
 
     expect(board.hasFalling()).to.be.false;
   });
+
+  test("it cannot be moved left through other blocks", () => {
+    board.landedBlock = "X";
+    board.landedX = 2;
+    board.landedY = 1;
+
+    board.drop(Tetromino.T_SHAPE);
+    board.moveLeft();
+
+    expect(board.toString()).to.equalShape(
+      `....T.....
+      ..XTTT....
+      ..........
+      ..........
+      ..........
+      ..........`
+    );
+  });
 });
