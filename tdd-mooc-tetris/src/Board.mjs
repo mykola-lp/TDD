@@ -1,4 +1,7 @@
 export class Board {
+  // TODO: Move block geometry logic to Block/Shape class (getRows, getCell, getWidth, getHeight)
+  // Suggested split: Board → game rules/state; Block/Shape → geometry.
+
   width;
   height;
 
@@ -30,7 +33,7 @@ export class Board {
     const blockHeight = this.getHeight(this.currentBlock);
     const bottomY = this.y + blockHeight;
 
-    const hitsLandedBlock = this.wouldHitLandedBlock();
+    const hitsLandedBlock = this.wouldHitLandedBlockBelow();
 
     if (bottomY < this.height && !hitsLandedBlock) {
       this.y += 1;
@@ -139,10 +142,6 @@ export class Board {
     return 0;
   }
 
-  wouldHitLandedBlock() {
-    return this.wouldHitLandedBlockAt(this.x, this.y + 1);
-  }
-
   wouldHitLandedBlockAt(nextX, nextY) {
     const currentRows = this.getRows(this.currentBlock);
     const landedRows = this.getRows(this.landedBlock);
@@ -162,5 +161,9 @@ export class Board {
     }
 
     return false;
+  }
+
+  wouldHitLandedBlockBelow() {
+    return this.wouldHitLandedBlockAt(this.x, this.y + 1);
   }
 }
