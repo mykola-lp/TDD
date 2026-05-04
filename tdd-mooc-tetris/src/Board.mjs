@@ -44,6 +44,10 @@ export class Board {
     }
   }
 
+  moveDown() {
+    this.tick();
+  }
+
   hasFalling() {
     return this.falling;
   }
