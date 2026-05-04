@@ -32,7 +32,9 @@ export class Board {
     const blockHeight = this.getHeight(this.currentBlock);
     const bottomY = this.y + blockHeight;
     
-    if (bottomY < this.height && !(this.x === this.landedX && this.y + 1 === this.landedY)) {
+    const hitsLandedBlock = this.wouldHitLandedBlock();
+
+    if (bottomY < this.height && !hitsLandedBlock) {
       this.y += 1;
     } else if (bottomY === this.height) {
       this.landedBlock = this.currentBlock;
