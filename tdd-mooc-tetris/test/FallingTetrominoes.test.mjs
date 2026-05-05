@@ -242,4 +242,22 @@ describe("Falling tetrominoes", () => {
       X.........`
     );
   });
+
+  test("it cannot be rotated through landed blocks", () => {
+    board.landedBlock = "XXX";
+    board.landedX = 3;
+    board.landedY = 2;
+
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateRight();
+
+    expect(board.toString()).to.equalShape(
+      `....T.....
+      ...TTT....
+      ...XXX....
+      ..........
+      ..........
+      ..........`
+    );
+  });
 });

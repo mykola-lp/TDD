@@ -70,7 +70,16 @@ export class Board {
       return;
     }
 
-    this.currentBlock = this.currentBlock.rotateRight();
+    const rotatedBlock = this.currentBlock.rotateRight();
+    const rotatedWidth = this.getWidth(rotatedBlock);
+    const rotatedHeight = this.getHeight(rotatedBlock);
+
+    if (this.x + rotatedWidth > this.width) return;
+    if (this.y + rotatedHeight > this.height) return;
+
+    if (this.wouldBlockHitLandedBlockAt(rotatedBlock, this.x, this.y)) return;
+
+    this.currentBlock = rotatedBlock;
   }
 
   hasFalling() {
@@ -150,8 +159,8 @@ export class Board {
     return 0;
   }
 
-  wouldHitLandedBlockAt(nextX, nextY) {
-    const currentRows = this.getRows(this.currentBlock);
+  wouldBlockHitLandedBlockAt(block, nextX, nextY) {
+    const currentRows = this.getRows(block);
     const landedRows = this.getRows(this.landedBlock);
 
     for (let row = 0; row < currentRows.length; row++) {
@@ -169,6 +178,10 @@ export class Board {
     }
 
     return false;
+  }
+
+  wouldHitLandedBlockAt(nextX, nextY) {
+    return this.wouldBlockHitLandedBlockAt(this.currentBlock, nextX, nextY);
   }
 
   wouldHitLandedBlockBelow() {
