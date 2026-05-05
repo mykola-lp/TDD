@@ -260,4 +260,22 @@ describe("Falling tetrominoes", () => {
       ..........`
     );
   });
+
+  test("wall kick moves the tetromino away from landed blocks if possible", () => {
+    board.landedBlock = "X";
+    board.landedX = 4;
+    board.landedY = 2;
+
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateRight();
+
+    expect(board.toString()).to.equalShape(
+      `.....T....
+      .....TT...
+      ....XT....
+      ..........
+      ..........
+      ..........`
+    );
+  });
 });

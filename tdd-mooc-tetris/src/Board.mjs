@@ -66,20 +66,34 @@ export class Board {
   }
 
   rotateRight() {
-    if (!this.falling) {
-      return;
-    }
+    if (!this.falling) return;
 
     const rotatedBlock = this.currentBlock.rotateRight();
-    const rotatedWidth = this.getWidth(rotatedBlock);
-    const rotatedHeight = this.getHeight(rotatedBlock);
 
-    if (this.x + rotatedWidth > this.width) return;
-    if (this.y + rotatedHeight > this.height) return;
+    if (this.tryPlaceRotatedBlock(rotatedBlock, this.x)) return;
+    if (this.tryPlaceRotatedBlock(rotatedBlock, this.x + 1)) return;
 
-    if (this.wouldBlockHitLandedBlockAt(rotatedBlock, this.x, this.y)) return;
+    this.tryPlaceRotatedBlock(rotatedBlock, this.x - 1);
+  }
 
-    this.currentBlock = rotatedBlock;
+  tryPlaceRotatedBlock(block, x) {
+    if (!this.canPlace(block, x, this.y)) return false;
+
+    this.currentBlock = block;
+    this.x = x;
+  
+    return true;
+  }
+
+  canPlace(block, x, y) {
+    if (x < 0 || y < 0) return false;
+
+    if (x + this.getWidth(block) > this.width) return false;
+    if (y + this.getHeight(block) > this.height) return false;
+
+    if (this.wouldBlockHitLandedBlockAt(block, x, y)) return false;
+    
+    return true;
   }
 
   hasFalling() {
