@@ -41,4 +41,18 @@ describe("Line clear", () => {
        XXXXXXXXX.`
     );
   });
+
+  test("clears a full row even when it is inside a multi-row landed shape", () => {
+    board.drop("XXXXXXXXX.\nXXXXXXXXXX");
+    fallToBottom(board);
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..........
+       XXXXXXXXX.`
+    );
+  });
 });

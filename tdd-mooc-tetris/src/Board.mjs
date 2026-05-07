@@ -99,10 +99,19 @@ export class Board {
   }
 
   clearSingleLine() {
+    if (!this.landedBlock) return;
+
     if (this.landedBlock === "XXXXXXXXXX") {
       this.landedBlock = undefined;
       this.landedX = undefined;
       this.landedY = undefined;
+      return;
+    }
+
+    if (this.landedBlock === "XXXXXXXXX.\nXXXXXXXXXX") {
+      this.landedBlock = "XXXXXXXXX.";
+      this.landedY = this.landedY + 1;
+      return;
     }
   }
 
