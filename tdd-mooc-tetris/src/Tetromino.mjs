@@ -6,11 +6,6 @@ export class Tetromino {
     this.index = index;
   }
 
-  static fromString(str, orientationCount) {
-    const shape = RotatingShape.fromString(str);
-    return Tetromino.fromShape(shape, orientationCount);
-  }
-
   static fromOrientations(strings) {
     const orientations = [];
 
