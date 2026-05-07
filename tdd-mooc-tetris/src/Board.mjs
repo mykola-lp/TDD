@@ -106,7 +106,16 @@ export class Board {
     let clearedRowCount = 0;
 
     for (let i = 0; i < rows.length; i++) {
-      if (rows[i] === "X".repeat(this.width)) {
+      const row = rows[i];
+      let isFullRow = true;
+
+      if (row.length !== this.width) isFullRow = false;
+
+      for (let j = 0; j < rows[i].length; j++) {
+        if (rows[i][j] === ".") isFullRow = false;
+      }
+
+      if (isFullRow) {
         clearedRowCount += 1;
       } else {
         keptRows.push(rows[i]);
