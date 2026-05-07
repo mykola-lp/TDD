@@ -74,14 +74,18 @@ export class Tetromino {
      .T.`
   ]);
 
-  static I_SHAPE = Tetromino.fromString(
+  static I_SHAPE = Tetromino.fromOrientations([
     `.....
      .....
      IIII.
      .....
      .....`,
-    2
-  );
+    `..I..
+     ..I..
+     ..I..
+     ..I..
+     .....`,
+  ]);
 
   static O_SHAPE = Tetromino.fromString(
     `.OO
