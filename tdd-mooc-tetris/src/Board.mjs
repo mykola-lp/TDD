@@ -102,6 +102,16 @@ export class Board {
     if (!this.landedBlock) return;
 
     const rows = this.getRows(this.landedBlock);
+    const keptRows = [];
+    let clearedRowCount = 0;
+
+    for (let i = 0; i < rows.length; i++) {
+      if (rows[i] === "X".repeat(this.width)) {
+        clearedRowCount += 1;
+      } else {
+        keptRows.push(rows[i]);
+      }
+    }
 
     if (rows.length === 1 && rows[0] === "XXXXXXXXXX") {
       this.landedBlock = undefined;
