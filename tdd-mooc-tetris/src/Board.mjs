@@ -101,21 +101,24 @@ export class Board {
   clearSingleLine() {
     if (!this.landedBlock) return;
 
-    if (this.landedBlock === "XXXXXXXXXX") {
+    const rows = this.getRows(this.landedBlock);
+
+    if (rows.length === 1 && rows[0] === "XXXXXXXXXX") {
       this.landedBlock = undefined;
       this.landedX = undefined;
       this.landedY = undefined;
       return;
     }
 
-    if (this.landedBlock === "XXXXXXXXX.\nXXXXXXXXXX") {
-      this.landedBlock = "XXXXXXXXX.";
-      this.landedY = this.landedY + 1;
+    if (rows.length === 2 && rows[0] === "XXXXXXXXXX" && rows[1] === "XXXXXXXXXX") {
+      this.landedBlock = undefined;
+      this.landedX = undefined;
+      this.landedY = undefined;
       return;
     }
 
-    if (this.landedBlock === "....X.....\nXXXXXXXXXX") {
-      this.landedBlock = "....X.....";
+    if (rows.length === 2 && rows[1] === "XXXXXXXXXX") {
+      this.landedBlock = rows[0];
       this.landedY = this.landedY + 1;
     }
   }

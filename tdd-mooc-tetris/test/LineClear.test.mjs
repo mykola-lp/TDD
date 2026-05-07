@@ -72,4 +72,18 @@ describe("Line clear", () => {
        ....X.....`
     );
   });
+
+  test("clears two full rows at once", () => {
+    board.drop("XXXXXXXXXX\nXXXXXXXXXX");
+    fallToBottom(board);
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..........
+       ..........`
+    );
+  });
 });
