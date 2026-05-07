@@ -42,6 +42,8 @@ export class Board {
       this.landedX = this.x;
       this.landedY = this.y;
       this.falling = false;
+      this.currentBlock = undefined;
+      this.clearSingleLine();
     } else {
       this.falling = false;
     }
@@ -94,6 +96,14 @@ export class Board {
     if (this.wouldBlockHitLandedBlockAt(block, x, y)) return false;
     
     return true;
+  }
+
+  clearSingleLine() {
+    if (this.landedBlock === "XXXXXXXXXX") {
+      this.landedBlock = undefined;
+      this.landedX = undefined;
+      this.landedY = undefined;
+    }
   }
 
   hasFalling() {
