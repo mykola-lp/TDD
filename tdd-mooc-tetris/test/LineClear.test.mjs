@@ -61,7 +61,7 @@ describe("Line clear", () => {
     board.landedX = 0;
     board.landedY = 4;
 
-    board.clearSingleLine();
+    board.clearLines();
 
     expect(board.toString()).to.equalShape(
       `..........
@@ -92,7 +92,7 @@ describe("Line clear", () => {
     board.landedX = 0;
     board.landedY = 2;
 
-    board.clearSingleLine();
+    board.clearLines();
 
     expect(board.toString()).to.equalShape(
       `..........

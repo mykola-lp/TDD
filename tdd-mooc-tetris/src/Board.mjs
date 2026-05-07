@@ -43,7 +43,7 @@ export class Board {
       this.landedY = this.y;
       this.falling = false;
       this.currentBlock = undefined;
-      this.clearSingleLine();
+      this.clearLines();
     } else {
       this.falling = false;
     }
@@ -98,7 +98,7 @@ export class Board {
     return true;
   }
 
-  clearSingleLine() {
+  clearLines() {
     if (!this.landedBlock) return;
 
     const rows = this.getRows(this.landedBlock);
