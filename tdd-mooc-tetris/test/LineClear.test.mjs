@@ -86,4 +86,21 @@ describe("Line clear", () => {
        ..........`
     );
   });
+
+  test("moves rows above down by two after clearing two rows", () => {
+    board.landedBlock = "....X.....\n....Y.....\nXXXXXXXXXX\nXXXXXXXXXX";
+    board.landedX = 0;
+    board.landedY = 2;
+
+    board.clearSingleLine();
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ....X.....
+       ....Y.....`
+    );
+  });
 });
