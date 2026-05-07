@@ -27,4 +27,18 @@ describe("Line clear", () => {
        ..........`
     );
   });
+
+  test("does not clear a row that is not full", () => {
+    board.drop("XXXXXXXXX.");
+    fallToBottom(board);
+
+    expect(board.toString()).to.equalShape(
+      `..........
+       ..........
+       ..........
+       ..........
+       ..........
+       XXXXXXXXX.`
+    );
+  });
 });
