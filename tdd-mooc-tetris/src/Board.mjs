@@ -102,27 +102,31 @@ export class Board {
     if (!this.landedBlock) return;
 
     const rows = this.getRows(this.landedBlock);
+
     const keptRows = [];
     let clearedRowCount = 0;
 
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
-      let isFullRow = true;
 
-      if (row.length !== this.width) isFullRow = false;
-
-      for (let j = 0; j < rows[i].length; j++) {
-        if (rows[i][j] === ".") isFullRow = false;
-      }
-
-      if (isFullRow) {
+      if (this.isFullRow(row)) {
         clearedRowCount += 1;
       } else {
-        keptRows.push(rows[i]);
+        keptRows.push(row);
       }
     }
-  
+
     this.applyClearedRows(keptRows, clearedRowCount);
+  }
+
+  isFullRow(row) {
+    if (row.length !== this.width) return false;
+
+    for (let i = 0; i < row.length; i++) {
+      if (row[i] === ".") return false;
+    }
+
+    return true;
   }
 
   applyClearedRows(keptRows, clearedRowCount) {
