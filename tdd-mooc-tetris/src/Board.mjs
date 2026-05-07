@@ -126,12 +126,6 @@ export class Board {
     this.landedY = this.landedY + clearedRowCount;
     return;
 
-    if (rows.length === 2 && rows[1] === "XXXXXXXXXX") {
-      this.landedBlock = rows[0];
-      this.landedY = this.landedY + 1;
-      return;
-    }
-
     if (rows.length === 4 && rows[2] === "XXXXXXXXXX" && rows[3] === "XXXXXXXXXX") {
       this.landedBlock = rows[0] + "\n" + rows[1];
       this.landedY = this.landedY + 2;
