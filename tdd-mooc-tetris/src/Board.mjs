@@ -112,13 +112,19 @@ export class Board {
         keptRows.push(rows[i]);
       }
     }
+  
+    if (clearedRowCount === 0) return;
 
-    if (rows.length === 1 && rows[0] === "XXXXXXXXXX") {
+    if (keptRows.length === 0) {
       this.landedBlock = undefined;
       this.landedX = undefined;
       this.landedY = undefined;
       return;
     }
+
+    this.landedBlock = keptRows.join("\n");
+    this.landedY = this.landedY + clearedRowCount;
+    return;
 
     if (rows.length === 2 && rows[0] === "XXXXXXXXXX" && rows[1] === "XXXXXXXXXX") {
       this.landedBlock = undefined;
