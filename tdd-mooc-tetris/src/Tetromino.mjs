@@ -23,6 +23,16 @@ export class Tetromino {
     return Tetromino.fromShape(shape, orientationCount);
   }
 
+  static fromOrientations(strings) {
+    const orientations = [];
+
+    for (const str of strings) {
+      orientations.push(RotatingShape.fromString(str));
+    }
+
+    return new Tetromino(orientations, 0);
+  }
+
   toString() {
     return this.orientations[this.index].toString();
   }
