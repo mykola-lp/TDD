@@ -124,12 +124,6 @@ export class Board {
 
     this.landedBlock = keptRows.join("\n");
     this.landedY = this.landedY + clearedRowCount;
-    return;
-
-    if (rows.length === 4 && rows[2] === "XXXXXXXXXX" && rows[3] === "XXXXXXXXXX") {
-      this.landedBlock = rows[0] + "\n" + rows[1];
-      this.landedY = this.landedY + 2;
-    }
   }
 
   hasFalling() {
