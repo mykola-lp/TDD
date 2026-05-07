@@ -122,6 +122,10 @@ export class Board {
       }
     }
   
+    this.applyClearedRows(keptRows, clearedRowCount);
+  }
+
+  applyClearedRows(keptRows, clearedRowCount) {
     if (clearedRowCount === 0) return;
 
     if (keptRows.length === 0) {
