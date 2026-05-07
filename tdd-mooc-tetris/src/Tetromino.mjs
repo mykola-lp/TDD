@@ -59,12 +59,20 @@ export class Tetromino {
     return new Tetromino(this.orientations, nextIndex);
   }
 
-  static T_SHAPE = Tetromino.fromString(
+  static T_SHAPE = Tetromino.fromOrientations([
     `.T.
      TTT
      ...`,
-    4
-  );
+    `.T.
+     .TT
+     .T.`,
+    `TTT
+     .T.
+     ...`,
+    `.T.
+     TT.
+     .T.`
+  ]);
 
   static I_SHAPE = Tetromino.fromString(
     `.....
