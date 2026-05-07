@@ -113,6 +113,11 @@ export class Board {
       this.landedY = this.landedY + 1;
       return;
     }
+
+    if (this.landedBlock === "....X.....\nXXXXXXXXXX") {
+      this.landedBlock = "....X.....";
+      this.landedY = this.landedY + 1;
+    }
   }
 
   hasFalling() {
