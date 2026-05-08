@@ -40,4 +40,12 @@ describe("ScoringSystem", () => {
 
     expect(scoring.score).to.equal(300);
   });
+
+  test("awards points for clearing four lines", () => {
+    const scoring = new ScoringSystem();
+
+    scoring.linesCleared(4);
+
+    expect(scoring.score).to.equal(1200);
+  });
 });
