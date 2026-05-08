@@ -14,24 +14,16 @@ describe("ScoringSystem", () => {
   });
 
   test("adds points for one cleared line", () => {
-    const scoring = new ScoringSystem();
-
     scoring.linesCleared(1);
-
     expect(scoring.score).to.equal(40);
   });
 
   test("awards more points for two lines than one", () => {
-    const scoring = new ScoringSystem();
-
     scoring.linesCleared(2);
-
     expect(scoring.score).to.equal(100);
   });
 
   test("accumulates score across multiple clears", () => {
-    const scoring = new ScoringSystem();
-
     scoring.linesCleared(1);
     scoring.linesCleared(2);
 
@@ -39,18 +31,12 @@ describe("ScoringSystem", () => {
   });
 
   test("awards points for clearing three lines", () => {
-    const scoring = new ScoringSystem();
-
     scoring.linesCleared(3);
-
     expect(scoring.score).to.equal(300);
   });
 
   test("awards points for clearing four lines", () => {
-    const scoring = new ScoringSystem();
-
     scoring.linesCleared(4);
-
     expect(scoring.score).to.equal(1200);
   });
 
@@ -59,8 +45,6 @@ describe("ScoringSystem", () => {
   });
 
   test("reaches level two after clearing ten lines", () => {
-    const scoring = new ScoringSystem();
-
     for (let i = 0; i < 10; i++) {
       scoring.linesCleared(1);
     }
@@ -69,8 +53,6 @@ describe("ScoringSystem", () => {
   });
 
   test("awards more points at level two", () => {
-    const scoring = new ScoringSystem();
-
     for (let i = 0; i < 10; i++) {
       scoring.linesCleared(1);
     }
@@ -81,8 +63,6 @@ describe("ScoringSystem", () => {
   });
 
   test("reaches level five after clearing forty lines", () => {
-    const scoring = new ScoringSystem();
-
     for (let i = 0; i < 10; i++) {
         scoring.linesCleared(4);
     }
@@ -91,8 +71,6 @@ describe("ScoringSystem", () => {
   });
 
   test("awards Nintendo points at level five", () => {
-    const scoring = new ScoringSystem();
-
     for (let i = 0; i < 10; i++) {
         scoring.linesCleared(4);
     }
