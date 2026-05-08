@@ -48,4 +48,8 @@ describe("ScoringSystem", () => {
 
     expect(scoring.score).to.equal(1200);
   });
+
+  test("starts at level one", () => {
+    expect(new ScoringSystem().level).to.equal(1);
+  });
 });

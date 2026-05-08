@@ -1,5 +1,6 @@
 export class ScoringSystem {
   score = 0;
+  level = 1;
 
   linesCleared(count) {
     if (count === 1) this.score += 40;
