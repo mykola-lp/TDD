@@ -23,4 +23,13 @@ describe("ScoringSystem", () => {
 
     expect(scoring.score).to.equal(100);
   });
+
+  test("accumulates score across multiple clears", () => {
+    const scoring = new ScoringSystem();
+
+    scoring.linesCleared(1);
+    scoring.linesCleared(2);
+
+    expect(scoring.score).to.equal(140);
+  });
 });
