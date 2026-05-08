@@ -113,4 +113,14 @@ describe("Line clear", () => {
 
     expect(cleared).to.equal(1);
   });
+
+  test("notifies how many rows were cleared at once", () => {
+    let cleared;
+    board.onClearLine = (count) => (cleared = count);
+
+    board.drop("XXXXXXXXXX\nXXXXXXXXXX");
+    fallToBottom(board);
+
+    expect(cleared).to.equal(2);
+  });
 });
