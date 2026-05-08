@@ -51,35 +51,23 @@ describe("ScoringSystem", () => {
   });
 
   test("reaches level two after clearing ten lines", () => {
-    for (let i = 0; i < 10; i++) {
-      scoring.linesCleared(1);
-    }
-
+    simulateLineClears(scoring, 1);
     expect(scoring.level).to.equal(2);
   });
 
   test("awards more points at level two", () => {
-    for (let i = 0; i < 10; i++) {
-      scoring.linesCleared(1);
-    }
-
+    simulateLineClears(scoring, 1);
     scoring.linesCleared(1);
-
     expect(scoring.score).to.equal(480);
   });
 
   test("reaches level five after clearing forty lines", () => {
-    for (let i = 0; i < 10; i++) {
-        scoring.linesCleared(4);
-    }
-
+    simulateLineClears(scoring, 4);
     expect(scoring.level).to.equal(5);
   });
 
   test("awards Nintendo points at level five", () => {
-    for (let i = 0; i < 10; i++) {
-        scoring.linesCleared(4);
-    }
+    simulateLineClears(scoring, 4);
 
     const previousScore = scoring.score;
     scoring.linesCleared(4);
