@@ -3,7 +3,16 @@ import { expect } from "chai";
 import { ScoringSystem } from "../src/ScoringSystem.mjs";
 
 describe("ScoringSystem", () => {
+
   test("starts with zero score", () => {
     expect(new ScoringSystem().score).to.equal(0);
+  });
+
+  test("adds points for one cleared line", () => {
+    const scoring = new ScoringSystem();
+
+    scoring.linesCleared(1);
+
+    expect(scoring.score).to.equal(40);
   });
 });
