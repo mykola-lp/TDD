@@ -84,4 +84,17 @@ describe("ScoringSystem", () => {
 
     expect(scoring.level).to.equal(5);
   });
+
+  test("awards Nintendo points at level five", () => {
+    const scoring = new ScoringSystem();
+
+    for (let i = 0; i < 10; i++) {
+        scoring.linesCleared(4);
+    }
+
+    const previousScore = scoring.score;
+    scoring.linesCleared(4);
+
+    expect(scoring.score - previousScore).to.equal(6000);
+  });
 });
