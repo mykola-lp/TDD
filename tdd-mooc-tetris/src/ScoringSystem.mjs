@@ -10,9 +10,6 @@ export class ScoringSystem {
     if (count === 4) this.score += 1200 * this.level;
 
     this.lines += count;
-
-    if (this.lines >= 10) {
-      this.level = 2;
-    }
+    this.level = Math.floor(this.lines / 10) + 1;
   }
 }

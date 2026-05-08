@@ -74,4 +74,14 @@ describe("ScoringSystem", () => {
 
     expect(scoring.score).to.equal(480);
   });
+
+  test("reaches level five after clearing forty lines", () => {
+    const scoring = new ScoringSystem();
+
+    for (let i = 0; i < 10; i++) {
+        scoring.linesCleared(4);
+    }
+
+    expect(scoring.level).to.equal(5);
+  });
 });
