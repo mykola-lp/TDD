@@ -123,4 +123,14 @@ describe("Line clear", () => {
 
     expect(cleared).to.equal(2);
   });
+
+  test("does not notify when no rows are cleared", () => {
+    let cleared = 0;
+    board.onClearLine = () => cleared++;
+
+    board.drop("XXXXXXXXX.");
+    fallToBottom(board);
+
+    expect(cleared).to.equal(0);
+  });
 });
