@@ -2,6 +2,12 @@ import { beforeEach, describe, test } from "vitest";
 import { expect } from "chai";
 import { ScoringSystem } from "../src/ScoringSystem.mjs";
 
+function simulateLineClears(scoring, linesPerClear, times = 10) {
+  for (let i = 0; i < times; i++) {
+    scoring.linesCleared(linesPerClear);
+  }
+}
+
 describe("ScoringSystem", () => {
   let scoring;
 
