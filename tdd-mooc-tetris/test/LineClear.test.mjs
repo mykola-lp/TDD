@@ -103,4 +103,14 @@ describe("Line clear", () => {
        ....Y.....`
     );
   });
+
+  test("notifies when one row is cleared", () => {
+    let cleared;
+    board.onClearLine = (count) => (cleared = count);
+
+    board.drop("XXXXXXXXXX");
+    fallToBottom(board);
+
+    expect(cleared).to.equal(1);
+  });
 });

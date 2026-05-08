@@ -117,6 +117,10 @@ export class Board {
     }
 
     this.applyClearedRows(keptRows, clearedRowCount);
+
+    if (clearedRowCount > 0 && this.onClearLine) {
+      this.onClearLine(clearedRowCount);
+    }
   }
 
   isFullRow(row) {
