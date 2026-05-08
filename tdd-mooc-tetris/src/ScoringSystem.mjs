@@ -3,11 +3,12 @@ export class ScoringSystem {
   level = 1;
   lines = 0;
 
+  points = { 1: 40, 2: 100, 3: 300, 4: 1200 };
+
   linesCleared(count) {
-    if (count === 1) this.score += 40 * this.level;
-    if (count === 2) this.score += 100 * this.level;
-    if (count === 3) this.score += 300 * this.level;
-    if (count === 4) this.score += 1200 * this.level;
+    const points = this.points[count] || 0;
+
+    this.score += points * this.level;
 
     this.lines += count;
     this.level = Math.floor(this.lines / 10) + 1;
