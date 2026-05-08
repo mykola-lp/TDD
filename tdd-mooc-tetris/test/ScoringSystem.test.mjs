@@ -62,4 +62,16 @@ describe("ScoringSystem", () => {
 
     expect(scoring.level).to.equal(2);
   });
+
+  test("awards more points at level two", () => {
+    const scoring = new ScoringSystem();
+
+    for (let i = 0; i < 10; i++) {
+      scoring.linesCleared(1);
+    }
+
+    scoring.linesCleared(1);
+
+    expect(scoring.score).to.equal(480);
+  });
 });
