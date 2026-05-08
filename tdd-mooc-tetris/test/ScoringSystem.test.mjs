@@ -15,4 +15,12 @@ describe("ScoringSystem", () => {
 
     expect(scoring.score).to.equal(40);
   });
+
+  test("awards more points for two lines than one", () => {
+    const scoring = new ScoringSystem();
+
+    scoring.linesCleared(2);
+
+    expect(scoring.score).to.equal(100);
+  });
 });
