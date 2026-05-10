@@ -116,4 +116,23 @@ describe("Falling blocks", () => {
       );
     });
   });
+  
+  test("blocks stay on the board when another block lands beside them", () => {
+    board.drop("X");
+    board.moveLeft();
+    board.tick();
+    board.tick();
+    board.tick();
+    board.drop("Y");
+    board.moveRight();
+    board.tick();
+    board.tick();
+    board.tick();
+
+    expect(board.toString()).to.equalShape(
+      `...
+       ...
+       X.Y`
+    );
+  });
 });
