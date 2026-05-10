@@ -7,12 +7,10 @@ export class PlacementRules {
   }
 
   canPlace(block, x, y, width, height, landedBlock, landedX, landedY) {
-    const board = this.board;
-
     if (y < 0 || x + this.geometry.getVisibleLeft(block) < 0) return false;
   
-    if (x + this.geometry.getWidth(block) > board.width) return false;
-    if (y + this.geometry.getHeight(block) > board.height) return false;
+    if (x + this.geometry.getWidth(block) > this.board.width) return false;
+    if (y + this.geometry.getHeight(block) > this.board.height) return false;
 
     if (this.wouldBlockHitLandedBlockAt(block, x, y)) return false;
     
@@ -20,10 +18,8 @@ export class PlacementRules {
   }
 
   wouldBlockHitLandedBlockAt(block, nextX, nextY) {
-    const board = this.board;
-
     const currentRows = this.geometry.getRows(block);
-    const landedRows = this.geometry.getRows(board.landedBlock);
+    const landedRows = this.geometry.getRows(this.board.landedBlock);
 
     for (let row = 0; row < currentRows.length; row++) {
       for (let column = 0; column < currentRows[row].length; column++) {
@@ -33,7 +29,7 @@ export class PlacementRules {
 
         const boardX = nextX + column;
         const boardY = nextY + row;
-        const landedCell = this.geometry.getCell(landedRows, board.landedX, board.landedY, boardX, boardY);
+        const landedCell = this.geometry.getCell(landedRows, this.board.landedX, this.board.landedY, boardX, boardY);
 
         if (landedCell !== ".") return true;
       }
