@@ -16,13 +16,13 @@ describe("ShuffleBag", () => {
   });
 
   test("starts over after all items are drawn", () => {
-    const bag = new ShuffleBag(["I", "T"]);
+    const bag = new ShuffleBag(["I", "T"], () => 0);
 
-    expect(bag.next()).to.equal("I");
-    expect(bag.next()).to.equal("T");
+    const firstRound = [bag.next(), bag.next()];
+    const secondRound = [bag.next(), bag.next()];
 
-    expect(bag.next()).to.equal("I");
-    expect(bag.next()).to.equal("T");
+    expect(firstRound.slice().sort()).to.deep.equal(["I", "T"]);
+    expect(secondRound.slice().sort()).to.deep.equal(["I", "T"]);
   });
 
   test("supports duplicate items", () => {

@@ -14,6 +14,14 @@ export class ShuffleBag {
   }
 
   shuffle(items) {
-    return [...items];
+    items = [...items];
+
+    const randomIndex = Math.floor(this.random() * items.length);
+  
+    const curr = items[0];
+    items[0] = items[randomIndex];
+    items[randomIndex] = curr;
+
+    return items;
   }
 }
