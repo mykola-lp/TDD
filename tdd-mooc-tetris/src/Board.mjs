@@ -1,10 +1,8 @@
 import { BlockGeometry } from "./BlockGeometry.mjs";
 import { PlacementRules } from "./PlacementRules.mjs";
-import { LineClearing } from "./LineClearing.mjs";
-export class Board {
-  // TODO: Move block geometry logic to Block/Shape class (getRows, getCell, getWidth, getHeight)
-  // Suggested split: Board → game rules/state; Block/Shape → geometry.
+import { isFullRow, applyClearedRows } from "./LineClearing.mjs";
 
+export class Board {
   width;
   height;
 
@@ -24,8 +22,6 @@ export class Board {
       geometry: this.geometry,
       board: this
     });
-
-    this.lineClearing = new LineClearing(this);
   }
 
   drop(block) {
@@ -129,14 +125,14 @@ export class Board {
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
 
-      if (this.lineClearing.isFullRow(row)) {
+      if (isFullRow(row, this.width)) {
         clearedRowCount += 1;
       } else {
         keptRows.push(row);
       }
     }
 
-    this.lineClearing.applyClearedRows(keptRows, clearedRowCount);
+    applyClearedRows(this, keptRows, clearedRowCount);
 
     if (clearedRowCount > 0 && this.onClearLine) {
       this.onClearLine(clearedRowCount);

@@ -1,31 +1,23 @@
-import { BlockGeometry } from "./BlockGeometry.mjs";
+export function isFullRow(row, width) {
+  if (row.length !== width) return false;
 
-export class LineClearing {
-  constructor(board) {
-    this.board = board;
+  for (let i = 0; i < row.length; i++) {
+    if (row[i] === ".") return false;
   }
 
-  applyClearedRows(keptRows, clearedRowCount) {
-    if (clearedRowCount === 0) return;
+  return true;
+}
 
-    if (keptRows.length === 0) {
-      this.board.landedBlock = undefined;
-      this.board.landedX = undefined;
-      this.board.landedY = undefined;
-      return;
-    }
+export function applyClearedRows(board, keptRows, clearedRowCount) {
+  if (clearedRowCount === 0) return;
 
-    this.board.landedBlock = keptRows.join("\n");
-    this.board.landedY = this.board.landedY + clearedRowCount;
+  if (keptRows.length === 0) {
+    board.landedBlock = undefined;
+    board.landedX = undefined;
+    board.landedY = undefined;
+    return;
   }
 
-  isFullRow(row) {
-    if (row.length !== this.board.width) return false;
-
-    for (let i = 0; i < row.length; i++) {
-      if (row[i] === ".") return false;
-    }
-
-    return true;
-  }
+  board.landedBlock = keptRows.join("\n");
+  board.landedY += clearedRowCount;
 }
