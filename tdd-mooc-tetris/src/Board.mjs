@@ -180,8 +180,8 @@ export class Board {
 
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
-        const current = this.getCell(currentRows, this.x, this.y, x, y);
-        const landed = this.getCell(landedRows, this.landedX, this.landedY, x, y);
+        const current = this.geometry.getCell(currentRows, this.x, this.y, x, y);
+        const landed = this.geometry.getCell(landedRows, this.landedX, this.landedY, x, y);
 
         if (current !== ".") {
           res += current;
@@ -195,10 +195,6 @@ export class Board {
     }
 
     return res;
-  }
-
-  getCell(rows, blockX, blockY, x, y) {
-    return this.geometry.getCell(rows, blockX, blockY, x, y);
   }
 
   getVisibleLeft(block) {
@@ -221,7 +217,7 @@ export class Board {
 
         const boardX = nextX + column;
         const boardY = nextY + row;
-        const landedCell = this.getCell(landedRows, this.landedX, this.landedY, boardX, boardY);
+        const landedCell = this.geometry.getCell(landedRows, this.landedX, this.landedY, boardX, boardY);
 
         if (landedCell !== ".") return true;
       }
