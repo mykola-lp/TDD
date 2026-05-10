@@ -104,5 +104,16 @@ describe("Falling blocks", () => {
       );
       expect(board.hasFalling(), "the block should stop moving").to.be.false;
     });
+
+    test("it stays on the board after another block is dropped", () => {
+      board.tick();
+      board.drop("Z");
+
+      expect(board.toString()).to.equalShape(
+        `.Z.
+         .Y.
+         .X.`
+      );
+    });
   });
 });

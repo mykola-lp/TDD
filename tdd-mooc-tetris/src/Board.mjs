@@ -38,14 +38,19 @@ export class Board {
     if (bottomY < this.height && !hitsLandedBlock) {
       this.y += 1;
     } else if (bottomY === this.height) {
-      this.landedBlock = this.currentBlock;
-      this.landedX = this.x;
-      this.landedY = this.y;
+      this.landedBlock = this.toString();
+      this.landedX = 0;
+      this.landedY = 0;
       this.falling = false;
       this.currentBlock = undefined;
       this.clearLines();
     } else {
+      this.landedBlock = this.toString();
+      this.landedX = 0;
+      this.landedY = 0;
       this.falling = false;
+      this.currentBlock = undefined;
+      this.clearLines();
     }
   }
 
