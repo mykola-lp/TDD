@@ -216,10 +216,16 @@ export class Board {
 
   getWidth(block) {
     const rows = this.getRows(block);
-  
-    if (rows.length === 0) return 0;
 
-    return rows[0].length;
+    let width = 0;
+  
+    for (const row of rows) {
+      if (row !== ".".repeat(row.length)) {
+        width = Math.max(width, row.search(/\.*$/));
+      }
+    }
+  
+    return width;
   }
 
   getHeight(block) {
