@@ -123,7 +123,7 @@ export class Board {
   clearLines() {
     if (!this.landedBlock) return;
 
-    const rows = this.getRows(this.landedBlock);
+    const rows = this.geometry.getRows(this.landedBlock);
 
     const keptRows = [];
     let clearedRowCount = 0;
@@ -175,8 +175,8 @@ export class Board {
 
   toString() {
     let res = "";
-    const currentRows = this.getRows(this.currentBlock);
-    const landedRows = this.getRows(this.landedBlock);
+    const currentRows = this.geometry.getRows(this.currentBlock);
+    const landedRows = this.geometry.getRows(this.landedBlock);
 
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
@@ -197,11 +197,6 @@ export class Board {
     return res;
   }
 
-  getRows(block) {
-    if (!block) return [];
-    return this.geometry.getRows(block);
-  }
-
   getCell(rows, blockX, blockY, x, y) {
     return this.geometry.getCell(rows, blockX, blockY, x, y);
   }
@@ -215,8 +210,8 @@ export class Board {
   }
 
   wouldBlockHitLandedBlockAt(block, nextX, nextY) {
-    const currentRows = this.getRows(block);
-    const landedRows = this.getRows(this.landedBlock);
+    const currentRows = this.geometry.getRows(block);
+    const landedRows = this.geometry.getRows(this.landedBlock);
 
     for (let row = 0; row < currentRows.length; row++) {
       for (let column = 0; column < currentRows[row].length; column++) {
