@@ -16,6 +16,21 @@ describe("Falling blocks", () => {
     );
   });
 
+  test("a block does not drop into an occupied spawn position", () => {
+    board.landedBlock = ".X.";
+    board.landedX = 0;
+    board.landedY = 0;
+
+    board.drop("Y");
+
+    expect(board.toString()).to.equalShape(
+      `.X.
+       ...
+       ...`
+    );
+    expect(board.hasFalling()).to.be.false;
+  });
+
   describe("When a block is dropped", () => {
     beforeEach(() => {
       board.drop("X");

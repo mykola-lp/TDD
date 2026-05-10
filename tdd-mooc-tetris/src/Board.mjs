@@ -24,6 +24,12 @@ export class Board {
     this.currentBlock = block;
     this.x = Math.floor((this.width - this.getWidth(block)) / 2);
     this.y = 0;
+
+    if (!this.canPlace(block, this.x, this.y)) {
+      this.currentBlock = undefined;
+      return;
+    }
+
     this.falling = true;
   }
 
