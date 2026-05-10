@@ -16,12 +16,16 @@ export class ShuffleBag {
   shuffle(items) {
     items = [...items];
 
-    const randomIndex = Math.floor(this.random() * items.length);
+    const random = this.randomIndex(items.length);
   
     const curr = items[0];
-    items[0] = items[randomIndex];
-    items[randomIndex] = curr;
+    items[0] = items[random];
+    items[random] = curr;
 
     return items;
+  }
+
+  randomIndex(length) {
+    return Math.floor(this.random() * length);
   }
 }
