@@ -7,4 +7,11 @@ describe("ShuffleBag", () => {
     const bag = new ShuffleBag(["I"]);
     expect(bag.next()).to.equal("I");
   });
+
+  test("returns each item once before repeating", () => {
+    const bag = new ShuffleBag(["I", "T"]);
+
+    expect(bag.next()).to.equal("I");
+    expect(bag.next()).to.equal("T");
+  });
 });

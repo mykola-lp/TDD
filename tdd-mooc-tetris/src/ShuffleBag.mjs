@@ -1,9 +1,9 @@
 export class ShuffleBag {
   constructor(items) {
-    this.items = items;
+    this.items = [...items];
   }
 
   next() {
-    return this.items[0];
+    return this.items.shift();
   }
 }
