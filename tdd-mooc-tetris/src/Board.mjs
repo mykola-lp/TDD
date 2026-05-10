@@ -44,7 +44,7 @@ export class Board {
     const blockHeight = this.geometry.getHeight(this.currentBlock);
     const bottomY = this.y + blockHeight;
 
-    const hitsLandedBlock = this.wouldHitLandedBlockBelow();
+    const hitsLandedBlock = this.placement.wouldHitLandedBlockBelow(this.currentBlock, this.x, this.y);
 
     if (bottomY < this.height && !hitsLandedBlock) {
       this.y += 1;
@@ -186,9 +186,5 @@ export class Board {
     }
 
     return res;
-  }
-
-  wouldHitLandedBlockBelow() {
-    return this.placement.wouldHitLandedBlockBelow(this.currentBlock, this.x, this.y, this.landedBlock, this.landedX, this.landedY);
   }
 }
