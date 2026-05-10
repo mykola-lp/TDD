@@ -39,7 +39,7 @@ export class Board {
   tick() {
     if (!this.falling) return;
 
-    const blockHeight = this.getHeight(this.currentBlock);
+    const blockHeight = this.geometry.getHeight(this.currentBlock);
     const bottomY = this.y + blockHeight;
 
     const hitsLandedBlock = this.wouldHitLandedBlockBelow();
@@ -113,7 +113,7 @@ export class Board {
     if (y < 0 || x + this.getVisibleLeft(block) < 0) return false;
   
     if (x + this.geometry.getWidth(block) > this.width) return false;
-    if (y + this.getHeight(block) > this.height) return false;
+    if (y + this.geometry.getHeight(block) > this.height) return false;
 
     if (this.wouldBlockHitLandedBlockAt(block, x, y)) return false;
     
@@ -199,10 +199,6 @@ export class Board {
 
   getVisibleLeft(block) {
     return this.geometry.getVisibleLeft(block);
-  }
-
-  getHeight(block) {
-    return this.geometry.getHeight(block);
   }
 
   wouldBlockHitLandedBlockAt(block, nextX, nextY) {
