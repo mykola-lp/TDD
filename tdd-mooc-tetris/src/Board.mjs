@@ -188,10 +188,6 @@ export class Board {
     return res;
   }
 
-  wouldHitLandedBlockAt(nextX, nextY) {
-    return this.placement.wouldHitLandedBlockAt(this.currentBlock, nextX, nextY, this.landedBlock, this.landedX, this.landedY);
-  }
-
   wouldHitLandedBlockBelow() {
     return this.placement.wouldHitLandedBlockBelow(this.currentBlock, this.x, this.y, this.landedBlock, this.landedX, this.landedY);
   }

@@ -43,8 +43,8 @@ export class PlacementRules {
     return false;
   }
 
-  wouldHitLandedBlockAt(block, nextX, nextY, landedBlock, landedX, landedY) {
-    return this.wouldBlockHitLandedBlockAt(block, nextX, nextY, landedBlock, landedX, landedY);
+  wouldHitLandedBlockAt(block, nextX, nextY) {
+    return this.wouldBlockHitLandedBlockAt(block, nextX, nextY);
   }
 
   wouldHitLandedBlockBelow(block, x, y, landedBlock, landedX, landedY) {
