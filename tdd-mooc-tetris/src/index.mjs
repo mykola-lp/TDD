@@ -23,9 +23,11 @@ function initGame() {
     Tetromino.I_SHAPE,
     Tetromino.T_SHAPE,
     Tetromino.O_SHAPE,
-    Tetromino.S_SHAPE,
-    Tetromino.Z_SHAPE,
-    Tetromino.J_SHAPE,
+    // Disabled until these tetrominoes are implemented in Tetromino.mjs
+    // Because it causes an issue where no new pieces appear after 3 pieces
+    // Tetromino.S_SHAPE,
+    // Tetromino.Z_SHAPE,
+    // Tetromino.J_SHAPE,
   ]);
 
   document.addEventListener("keydown", (event) => {
