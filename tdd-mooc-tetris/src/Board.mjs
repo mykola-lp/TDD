@@ -110,7 +110,7 @@ export class Board {
   }
 
   canPlace(block, x, y) {
-    if (y < 0 || x + this.getVisibleLeft(block) < 0) return false;
+    if (y < 0 || x + this.geometry.getVisibleLeft(block) < 0) return false;
   
     if (x + this.geometry.getWidth(block) > this.width) return false;
     if (y + this.geometry.getHeight(block) > this.height) return false;
@@ -195,10 +195,6 @@ export class Board {
     }
 
     return res;
-  }
-
-  getVisibleLeft(block) {
-    return this.geometry.getVisibleLeft(block);
   }
 
   wouldBlockHitLandedBlockAt(block, nextX, nextY) {
