@@ -197,7 +197,7 @@ export class Board {
   }
 
   wouldHitLandedBlockAt(nextX, nextY) {
-    return this.wouldBlockHitLandedBlockAt(this.currentBlock, nextX, nextY);
+    return this.placement.wouldHitLandedBlockAt(this.currentBlock, nextX, nextY, this.landedBlock, this.landedX, this.landedY);
   }
 
   wouldHitLandedBlockBelow() {
