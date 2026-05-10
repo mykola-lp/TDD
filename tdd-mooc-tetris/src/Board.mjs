@@ -129,7 +129,7 @@ export class Board {
     for (let i = 0; i < rows.length; i++) {
       const row = rows[i];
 
-      if (this.isFullRow(row)) {
+      if (this.lineClearing.isFullRow(row)) {
         clearedRowCount += 1;
       } else {
         keptRows.push(row);
@@ -141,10 +141,6 @@ export class Board {
     if (clearedRowCount > 0 && this.onClearLine) {
       this.onClearLine(clearedRowCount);
     }
-  }
-
-  isFullRow(row) {
-    return this.lineClearing.isFullRow(row);
   }
 
   hasFalling() {
