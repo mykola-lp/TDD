@@ -14,7 +14,7 @@ export class Board {
   falling = false;
 
   geometry = new BlockGeometry();
-  placement = new PlacementRules();
+  placement = new PlacementRules(this);
 
   constructor(width, height) {
     this.width = width;
@@ -190,10 +190,6 @@ export class Board {
     }
 
     return res;
-  }
-
-  wouldBlockHitLandedBlockAt(block, nextX, nextY) {
-    return this.placement.wouldBlockHitLandedBlockAt(block, nextX, nextY, this.landedBlock, this.landedX, this.landedY);
   }
 
   wouldHitLandedBlockAt(nextX, nextY) {

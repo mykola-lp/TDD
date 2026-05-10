@@ -3,6 +3,10 @@ import { BlockGeometry } from "./BlockGeometry.mjs";
 export class PlacementRules {
   geometry = new BlockGeometry();
 
+  constructor(board) {
+    this.board = board;
+  }
+
   canPlace(block, x, y, width, height, landedBlock, landedX, landedY) {
     if (y < 0 || x + this.geometry.getVisibleLeft(block) < 0) return false;
   
@@ -14,9 +18,11 @@ export class PlacementRules {
     return true;
   }
 
-  wouldBlockHitLandedBlockAt(block, nextX, nextY, landedBlock, landedX, landedY) {
+  wouldBlockHitLandedBlockAt(block, nextX, nextY) {
+    const board = this.board;
+
     const currentRows = this.geometry.getRows(block);
-    const landedRows = this.geometry.getRows(landedBlock);
+    const landedRows = this.geometry.getRows(board.landedBlock);
 
     for (let row = 0; row < currentRows.length; row++) {
       for (let column = 0; column < currentRows[row].length; column++) {
@@ -26,7 +32,7 @@ export class PlacementRules {
 
         const boardX = nextX + column;
         const boardY = nextY + row;
-        const landedCell = this.geometry.getCell(landedRows, landedX, landedY, boardX, boardY);
+        const landedCell = this.geometry.getCell(landedRows, board.landedX, board.landedY, boardX, boardY);
 
         if (landedCell !== ".") return true;
       }
