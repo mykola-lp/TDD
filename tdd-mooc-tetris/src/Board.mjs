@@ -25,7 +25,7 @@ export class Board {
     }
 
     this.currentBlock = block;
-    this.x = Math.floor((this.width - this.getWidth(block)) / 2);
+    this.x = Math.floor((this.width - this.geometry.getWidth(block)) / 2);
     this.y = 0;
 
     if (!this.canPlace(block, this.x, this.y)) {
@@ -112,7 +112,7 @@ export class Board {
   canPlace(block, x, y) {
     if (y < 0 || x + this.getVisibleLeft(block) < 0) return false;
   
-    if (x + this.getWidth(block) > this.width) return false;
+    if (x + this.geometry.getWidth(block) > this.width) return false;
     if (y + this.getHeight(block) > this.height) return false;
 
     if (this.wouldBlockHitLandedBlockAt(block, x, y)) return false;
@@ -204,10 +204,6 @@ export class Board {
 
   getCell(rows, blockX, blockY, x, y) {
     return this.geometry.getCell(rows, blockX, blockY, x, y);
-  }
-
-  getWidth(block) {
-    return this.geometry.getWidth(block);
   }
 
   getVisibleLeft(block) {
