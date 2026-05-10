@@ -1,3 +1,4 @@
+import { BlockGeometry } from "./BlockGeometry.mjs";
 export class Board {
   // TODO: Move block geometry logic to Block/Shape class (getRows, getCell, getWidth, getHeight)
   // Suggested split: Board → game rules/state; Block/Shape → geometry.
@@ -10,6 +11,8 @@ export class Board {
   landedY;
 
   falling = false;
+
+  geometry = new BlockGeometry();
 
   constructor(width, height) {
     this.width = width;
@@ -196,16 +199,7 @@ export class Board {
 
   getRows(block) {
     if (!block) return [];
-  
-    const text = block.toString().trim();
-    const lines = text.split("\n");
-    const rows = [];
-
-    for (const line of lines) {
-      rows.push(line.trim());
-    }
-
-    return rows;
+    return this.geometry.getRows(block);
   }
 
   getCell(rows, blockX, blockY, x, y) {
