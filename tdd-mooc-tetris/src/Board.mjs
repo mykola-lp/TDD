@@ -1,5 +1,6 @@
 import { BlockGeometry } from "./BlockGeometry.mjs";
 import { PlacementRules } from "./PlacementRules.mjs";
+import { LineClearing } from "./LineClearing.mjs";
 export class Board {
   // TODO: Move block geometry logic to Block/Shape class (getRows, getCell, getWidth, getHeight)
   // Suggested split: Board → game rules/state; Block/Shape → geometry.
@@ -23,6 +24,8 @@ export class Board {
       geometry: this.geometry,
       board: this
     });
+
+    this.lineClearing = new LineClearing(this);
   }
 
   drop(block) {
@@ -133,7 +136,7 @@ export class Board {
       }
     }
 
-    this.applyClearedRows(keptRows, clearedRowCount);
+    this.lineClearing.applyClearedRows(keptRows, clearedRowCount);
 
     if (clearedRowCount > 0 && this.onClearLine) {
       this.onClearLine(clearedRowCount);
@@ -148,20 +151,6 @@ export class Board {
     }
 
     return true;
-  }
-
-  applyClearedRows(keptRows, clearedRowCount) {
-    if (clearedRowCount === 0) return;
-
-    if (keptRows.length === 0) {
-      this.landedBlock = undefined;
-      this.landedX = undefined;
-      this.landedY = undefined;
-      return;
-    }
-
-    this.landedBlock = keptRows.join("\n");
-    this.landedY = this.landedY + clearedRowCount;
   }
 
   hasFalling() {
