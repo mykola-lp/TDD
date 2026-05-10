@@ -1,4 +1,5 @@
 import { BlockGeometry } from "./BlockGeometry.mjs";
+import { PlacementRules } from "./PlacementRules.mjs";
 export class Board {
   // TODO: Move block geometry logic to Block/Shape class (getRows, getCell, getWidth, getHeight)
   // Suggested split: Board → game rules/state; Block/Shape → geometry.
@@ -13,6 +14,7 @@ export class Board {
   falling = false;
 
   geometry = new BlockGeometry();
+  placement = new PlacementRules();
 
   constructor(width, height) {
     this.width = width;
@@ -198,24 +200,7 @@ export class Board {
   }
 
   wouldBlockHitLandedBlockAt(block, nextX, nextY) {
-    const currentRows = this.geometry.getRows(block);
-    const landedRows = this.geometry.getRows(this.landedBlock);
-
-    for (let row = 0; row < currentRows.length; row++) {
-      for (let column = 0; column < currentRows[row].length; column++) {
-        const currentCell = currentRows[row][column];
-
-        if (currentCell === ".") continue;
-
-        const boardX = nextX + column;
-        const boardY = nextY + row;
-        const landedCell = this.geometry.getCell(landedRows, this.landedX, this.landedY, boardX, boardY);
-
-        if (landedCell !== ".") return true;
-      }
-    }
-
-    return false;
+    return this.placement.wouldBlockHitLandedBlockAt(block, nextX, nextY, this.landedBlock, this.landedX, this.landedY);
   }
 
   wouldHitLandedBlockAt(nextX, nextY) {
