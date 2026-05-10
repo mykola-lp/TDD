@@ -3,6 +3,17 @@ import { BlockGeometry } from "./BlockGeometry.mjs";
 export class PlacementRules {
   geometry = new BlockGeometry();
 
+  canPlace(block, x, y, width, height, landedBlock, landedX, landedY) {
+    if (y < 0 || x + this.geometry.getVisibleLeft(block) < 0) return false;
+  
+    if (x + this.geometry.getWidth(block) > width) return false;
+    if (y + this.geometry.getHeight(block) > height) return false;
+
+    if (this.wouldBlockHitLandedBlockAt(block, x, y, landedBlock, landedX, landedY)) return false;
+    
+    return true;
+  }
+
   wouldBlockHitLandedBlockAt(block, nextX, nextY, landedBlock, landedX, landedY) {
     const currentRows = this.geometry.getRows(block);
     const landedRows = this.geometry.getRows(landedBlock);

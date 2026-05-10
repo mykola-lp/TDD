@@ -112,14 +112,7 @@ export class Board {
   }
 
   canPlace(block, x, y) {
-    if (y < 0 || x + this.geometry.getVisibleLeft(block) < 0) return false;
-  
-    if (x + this.geometry.getWidth(block) > this.width) return false;
-    if (y + this.geometry.getHeight(block) > this.height) return false;
-
-    if (this.wouldBlockHitLandedBlockAt(block, x, y)) return false;
-    
-    return true;
+    return this.placement.canPlace(block, x, y, this.width, this.height, this.landedBlock, this.landedX, this.landedY);
   }
 
   clearLines() {
