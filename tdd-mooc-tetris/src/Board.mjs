@@ -207,17 +207,7 @@ export class Board {
   }
 
   getWidth(block) {
-    const rows = this.getRows(block);
-
-    let width = 0;
-  
-    for (const row of rows) {
-      if (row !== ".".repeat(row.length)) {
-        width = Math.max(width, row.search(/\.*$/));
-      }
-    }
-  
-    return width;
+    return this.geometry.getWidth(block);
   }
 
   getVisibleLeft(block) {
