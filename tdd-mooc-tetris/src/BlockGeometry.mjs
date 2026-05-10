@@ -42,4 +42,16 @@ export class BlockGeometry {
   
     return width;
   }
+
+  getHeight(block) {
+    const rows = this.getRows(block);
+  
+    for (let i = rows.length - 1; i >= 0; i--) {
+      if (rows[i] !== ".".repeat(rows[i].length)) {
+        return i + 1;
+      }
+    }
+  
+    return 0;
+  }
 }
