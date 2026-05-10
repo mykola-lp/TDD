@@ -211,14 +211,7 @@ export class Board {
   }
 
   getVisibleLeft(block) {
-    let inset = this.getWidth(block);
-
-    for (const row of this.getRows(block))
-      for (let i = 0; i < inset; i++) {
-        if (row[i] !== ".") inset = i;
-    }
-
-    return inset;
+    return this.geometry.getVisibleLeft(block);
   }
 
   getHeight(block) {
