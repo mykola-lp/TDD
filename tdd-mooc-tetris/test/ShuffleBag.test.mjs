@@ -24,4 +24,11 @@ describe("ShuffleBag", () => {
     expect(bag.next()).to.equal("I");
     expect(bag.next()).to.equal("T");
   });
+
+  test("supports duplicate items", () => {
+    const bag = new ShuffleBag(["I", "I", "T"]);
+    const drawn = [bag.next(), bag.next(), bag.next()];
+
+    expect(drawn.slice().sort()).to.deep.equal(["I", "I", "T"]);
+  });
 });
