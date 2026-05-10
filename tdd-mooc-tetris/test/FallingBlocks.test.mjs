@@ -16,7 +16,21 @@ describe("Falling blocks", () => {
     );
   });
 
-  /*
+  test("a block does not drop into an occupied spawn position", () => {
+    board.landedBlock = ".X.";
+    board.landedX = 0;
+    board.landedY = 0;
+
+    board.drop("Y");
+
+    expect(board.toString()).to.equalShape(
+      `.X.
+       ...
+       ...`
+    );
+    expect(board.hasFalling()).to.be.false;
+  });
+
   describe("When a block is dropped", () => {
     beforeEach(() => {
       board.drop("X");
@@ -30,7 +44,7 @@ describe("Falling blocks", () => {
       );
     });
 
-    test.skip("it moves down one row per tick", () => {
+    test("it moves down one row per tick", () => {
       board.tick();
 
       expect(board.toString()).to.equalShape(
@@ -40,16 +54,14 @@ describe("Falling blocks", () => {
       );
     });
 
-    test.skip("at most one block may be falling at a time", () => {
+    test("at most one block may be falling at a time", () => {
       const before = board.toString();
       expect(() => board.drop("Y")).to.throw("already falling");
       const after = board.toString();
       expect(after).to.equal(before);
     });
   });
-  */
 
-  /*
   describe("When a block reaches the bottom", () => {
     beforeEach(() => {
       board.drop("X");
@@ -66,7 +78,7 @@ describe("Falling blocks", () => {
       expect(board.hasFalling(), "the player should still be able to move the block").to.be.true;
     });
 
-    test.skip("it stops when it hits the bottom", () => {
+    test("it stops when it hits the bottom", () => {
       board.tick();
 
       expect(board.toString()).to.equalShape(
@@ -77,9 +89,7 @@ describe("Falling blocks", () => {
       expect(board.hasFalling(), "the block should stop moving").to.be.false;
     });
   });
-  */
 
-  /*
   describe("When a block lands on another block", () => {
     beforeEach(() => {
       board.drop("X");
@@ -99,7 +109,7 @@ describe("Falling blocks", () => {
       expect(board.hasFalling(), "the player should still be able to move the block").to.be.true;
     });
 
-    test.skip("it stops when it hits the other block", () => {
+    test("it stops when it hits the other block", () => {
       board.tick();
 
       expect(board.toString()).to.equalShape(
@@ -109,6 +119,35 @@ describe("Falling blocks", () => {
       );
       expect(board.hasFalling(), "the block should stop moving").to.be.false;
     });
+
+    test("it stays on the board after another block is dropped", () => {
+      board.tick();
+      board.drop("Z");
+
+      expect(board.toString()).to.equalShape(
+        `.Z.
+         .Y.
+         .X.`
+      );
+    });
   });
-  */
+  
+  test("blocks stay on the board when another block lands beside them", () => {
+    board.drop("X");
+    board.moveLeft();
+    board.tick();
+    board.tick();
+    board.tick();
+    board.drop("Y");
+    board.moveRight();
+    board.tick();
+    board.tick();
+    board.tick();
+
+    expect(board.toString()).to.equalShape(
+      `...
+       ...
+       X.Y`
+    );
+  });
 });
