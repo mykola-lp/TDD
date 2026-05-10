@@ -1,9 +1,8 @@
 import { BlockGeometry } from "./BlockGeometry.mjs";
 
 export class PlacementRules {
-  geometry = new BlockGeometry();
-
-  constructor(board) {
+  constructor({ geometry, board }) {
+    this.geometry = geometry;
     this.board = board;
   }
 

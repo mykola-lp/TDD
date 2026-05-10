@@ -13,12 +13,16 @@ export class Board {
 
   falling = false;
 
-  geometry = new BlockGeometry();
-  placement = new PlacementRules(this);
-
   constructor(width, height) {
     this.width = width;
     this.height = height;
+
+    this.geometry = new BlockGeometry();
+
+    this.placement = new PlacementRules({
+      geometry: this.geometry,
+      board: this
+    });
   }
 
   drop(block) {
