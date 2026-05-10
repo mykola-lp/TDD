@@ -30,7 +30,7 @@ export class Board {
     this.x = Math.floor((this.width - this.geometry.getWidth(block)) / 2);
     this.y = 0;
 
-    if (!this.canPlace(block, this.x, this.y)) {
+    if (!this.placement.canPlace(block, this.x, this.y)) {
       this.currentBlock = undefined;
       return;
     }
@@ -70,13 +70,13 @@ export class Board {
   }
 
   moveLeft() {
-    if (this.canPlace(this.currentBlock, this.x - 1, this.y)) {
+    if (this.placement.canPlace(this.currentBlock, this.x - 1, this.y)) {
       this.x -= 1;
     }
   }
 
   moveRight() {
-    if (this.canPlace(this.currentBlock, this.x + 1, this.y)) {
+    if (this.placement.canPlace(this.currentBlock, this.x + 1, this.y)) {
       this.x += 1;
     }
   }
@@ -103,16 +103,12 @@ export class Board {
   }
 
   tryPlaceRotatedBlock(block, x) {
-    if (!this.canPlace(block, x, this.y)) return false;
+    if (!this.placement.canPlace(block, x, this.y)) return false;
 
     this.currentBlock = block;
     this.x = x;
   
     return true;
-  }
-
-  canPlace(block, x, y) {
-    return this.placement.canPlace(block, x, y, this.width, this.height, this.landedBlock, this.landedX, this.landedY);
   }
 
   clearLines() {

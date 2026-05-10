@@ -8,12 +8,14 @@ export class PlacementRules {
   }
 
   canPlace(block, x, y, width, height, landedBlock, landedX, landedY) {
+    const board = this.board;
+
     if (y < 0 || x + this.geometry.getVisibleLeft(block) < 0) return false;
   
-    if (x + this.geometry.getWidth(block) > width) return false;
-    if (y + this.geometry.getHeight(block) > height) return false;
+    if (x + this.geometry.getWidth(block) > board.width) return false;
+    if (y + this.geometry.getHeight(block) > board.height) return false;
 
-    if (this.wouldBlockHitLandedBlockAt(block, x, y, landedBlock, landedX, landedY)) return false;
+    if (this.wouldBlockHitLandedBlockAt(block, x, y)) return false;
     
     return true;
   }
