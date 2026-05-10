@@ -54,15 +54,13 @@ export class Board {
   }
 
   moveLeft() {
-    if (this.x > 0 && !this.wouldHitLandedBlockAt(this.x - 1, this.y)) {
+    if (this.canPlace(this.currentBlock, this.x - 1, this.y)) {
       this.x -= 1;
     }
   }
 
   moveRight() {
-    const blockWidth = this.getWidth(this.currentBlock);
-
-    if (this.x + blockWidth < this.width && !this.wouldHitLandedBlockAt(this.x + 1, this.y)) {
+    if (this.canPlace(this.currentBlock, this.x + 1, this.y)) {
       this.x += 1;
     }
   }
@@ -98,8 +96,8 @@ export class Board {
   }
 
   canPlace(block, x, y) {
-    if (x < 0 || y < 0) return false;
-
+    if (y < 0 || x + this.getVisibleLeft(block) < 0) return false;
+  
     if (x + this.getWidth(block) > this.width) return false;
     if (y + this.getHeight(block) > this.height) return false;
 
@@ -226,6 +224,17 @@ export class Board {
     }
   
     return width;
+  }
+
+  getVisibleLeft(block) {
+    let inset = this.getWidth(block);
+
+    for (const row of this.getRows(block))
+      for (let i = 0; i < inset; i++) {
+        if (row[i] !== ".") inset = i;
+    }
+
+    return inset;
   }
 
   getHeight(block) {

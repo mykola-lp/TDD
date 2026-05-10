@@ -309,4 +309,22 @@ describe("Falling tetrominoes", () => {
       ..........`
     );
   });
+
+  test("the vertical I tetromino can be moved left against the wall", () => {
+    board.drop(Tetromino.I_SHAPE);
+    board.rotateRight();
+
+    for (let i = 0; i < 10; i++) {
+      board.moveLeft();
+    }
+
+    expect(board.toString()).to.equalShape(
+      `I.........
+      I.........
+      I.........
+      I.........
+      ..........
+      ..........`
+    );
+  });
 });
