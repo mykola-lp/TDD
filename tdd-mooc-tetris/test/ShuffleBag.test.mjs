@@ -31,4 +31,11 @@ describe("ShuffleBag", () => {
 
     expect(drawn.slice().sort()).to.deep.equal(["I", "I", "T"]);
   });
+
+  test("draws all items in shuffled order", () => {
+    const bag = new ShuffleBag(["I", "T", "L"], () => 0);
+    const drawn = [bag.next(), bag.next(), bag.next()];
+
+    expect(drawn.slice().sort()).to.deep.equal(["I", "L", "T"]);
+  });
 });
