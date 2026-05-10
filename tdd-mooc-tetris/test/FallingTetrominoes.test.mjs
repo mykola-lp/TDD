@@ -225,6 +225,20 @@ describe("Falling tetrominoes", () => {
     );
   });
 
+  test("a falling tetromino can be rotated left", () => {
+    board.drop(Tetromino.T_SHAPE);
+    board.rotateLeft();
+
+    expect(board.toString()).to.equalShape(
+      `....T.....
+      ...TT.....
+      ....T.....
+      ..........
+      ..........
+      ..........`
+    );
+  });
+
   test("rotating changes only the falling tetromino", () => {
     board.landedBlock = "X";
     board.landedX = 0;

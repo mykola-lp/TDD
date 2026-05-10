@@ -78,6 +78,16 @@ export class Board {
     this.tryPlaceRotatedBlock(rotatedBlock, this.x - 1);
   }
 
+  rotateLeft() {
+    if (!this.falling) return;
+
+    const block = this.currentBlock.rotateLeft();
+
+    [0, 1, -1].some(offset =>
+      this.tryPlaceRotatedBlock(block, this.x + offset)
+    );
+  }
+
   tryPlaceRotatedBlock(block, x) {
     if (!this.canPlace(block, x, this.y)) return false;
 

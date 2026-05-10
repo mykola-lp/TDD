@@ -22,10 +22,10 @@ function initGame() {
   game.tetrominoes = new ShuffleBag([
     Tetromino.I_SHAPE,
     Tetromino.T_SHAPE,
-    Tetromino.T_SHAPE,
+    Tetromino.O_SHAPE,
     Tetromino.S_SHAPE,
     Tetromino.Z_SHAPE,
-    Tetromino.O_SHAPE,
+    Tetromino.J_SHAPE,
   ]);
 
   document.addEventListener("keydown", (event) => {
