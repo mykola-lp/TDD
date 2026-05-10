@@ -144,13 +144,7 @@ export class Board {
   }
 
   isFullRow(row) {
-    if (row.length !== this.width) return false;
-
-    for (let i = 0; i < row.length; i++) {
-      if (row[i] === ".") return false;
-    }
-
-    return true;
+    return this.lineClearing.isFullRow(row);
   }
 
   hasFalling() {

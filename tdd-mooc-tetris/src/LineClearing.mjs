@@ -18,4 +18,14 @@ export class LineClearing {
     this.board.landedBlock = keptRows.join("\n");
     this.board.landedY = this.board.landedY + clearedRowCount;
   }
+
+  isFullRow(row) {
+    if (row.length !== this.board.width) return false;
+
+    for (let i = 0; i < row.length; i++) {
+      if (row[i] === ".") return false;
+    }
+
+    return true;
+  }
 }
