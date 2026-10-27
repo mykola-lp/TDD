@@ -32,4 +32,25 @@ describe("Testable files: parse people CSV", () => {
       },
     ]);
   });
+
+  test("parses multiple people from CSV text", () => {
+    const csvData = "John,Doe,30,Male\nJane,Smith,25,Female";
+
+    const people = parsePeopleCsv(csvData);
+
+    expect(people).to.deep.equal([
+      {
+        firstName: "John",
+        lastName: "Doe",
+        gender: "m",
+        age: 30,
+      },
+      {
+        firstName: "Jane",
+        lastName: "Smith",
+        gender: "f",
+        age: 25,
+      },
+    ]);
+  });
 });
