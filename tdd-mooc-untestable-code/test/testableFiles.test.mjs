@@ -1,7 +1,10 @@
 import { describe, test } from "vitest";
 import { expect } from "chai";
 
-import { parsePeopleCsvContent } from "../src/testableFiles.mjs";
+import {
+  parsePeopleCsv,
+  parsePeopleCsvContent,
+} from "../src/testableFiles.mjs";
 
 describe("Testable files: parse people CSV", () => {
   test("parses a person from CSV text", () => {
@@ -50,6 +53,25 @@ describe("Testable files: parse people CSV", () => {
         lastName: "Smith",
         gender: "f",
         age: 25,
+      },
+    ]);
+  });
+
+  test("reads and parses people from a CSV file", async () => {
+    const filePath = new URL("./fixtures/people.csv", import.meta.url);
+    const people = await parsePeopleCsv(filePath);
+
+    expect(people).to.deep.equal([
+      {
+        firstName: "Alice",
+        lastName: "Smith",
+        gender: "f",
+        age: 28,
+      },
+      {
+        firstName: "Bob",
+        lastName: "Jones",
+        gender: "m",
       },
     ]);
   });
