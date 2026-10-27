@@ -2,6 +2,7 @@ import argon2 from "@node-rs/argon2";
 import pg from "pg";
 
 export class PostgresUserDao {
+  // The singleton shares one DAO instance across services, making dependencies and test state harder to isolate.
   static instance;
 
   static getInstance() {
