@@ -18,4 +18,18 @@ describe("Testable files: parse people CSV", () => {
       },
     ]);
   });
+
+  test("omits age when CSV age is empty", () => {
+    const csvData = "Jane,Doe,,Female";
+
+    const people = parsePeopleCsv(csvData);
+
+    expect(people).to.deep.equal([
+      {
+        firstName: "Jane",
+        lastName: "Doe",
+        gender: "f",
+      },
+    ]);
+  });
 });
