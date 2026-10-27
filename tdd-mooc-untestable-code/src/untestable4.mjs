@@ -5,6 +5,9 @@ export class PostgresUserDao {
   // The singleton shares one DAO instance across services, making dependencies and test state harder to isolate.
   static instance;
 
+  // `static` means the field belongs to the PostgresUserDao class itself,
+  // not to an individual object created with `new`. Initially, `instance` is `undefined`.
+
   static getInstance() {
     if (!this.instance) {
       this.instance = new PostgresUserDao();
