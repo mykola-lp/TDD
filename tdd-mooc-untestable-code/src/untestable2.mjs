@@ -1,6 +1,7 @@
 function diceRoll() {
   const min = 1;
   const max = 6;
+  // Calling Math.random() directly makes specific dice rolls difficult to test reliably.
   return Math.floor(Math.random() * (max + 1 - min) + min);
 }
 
