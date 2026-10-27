@@ -11,4 +11,8 @@ describe("Testable randomness: dice hand value", () => {
   test("returns the higher die when dice differ", () => {
     expect(diceHandValue(2, 5)).to.equal(5);
   });
+
+  test("returns the higher die when arguments are reversed", () => {
+    expect(diceHandValue(5, 2)).to.equal(5);
+  });
 });
