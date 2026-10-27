@@ -64,4 +64,22 @@ describe("Testable globals: PostgresUserDao", () => {
     const user = await userDao.getById(999);
     expect(user).to.equal(null);
   });
+
+  test("updates an existing user when saved again", async () => {
+    const user = {
+      userId: 1,
+      passwordHash: "old-password-hash",
+    };
+
+    const updatedUser = {
+      userId: 1,
+      passwordHash: "new-password-hash",
+    };
+
+    await userDao.save(user);
+    await userDao.save(updatedUser);
+
+    const savedUser = await userDao.getById(1);
+    expect(savedUser).to.deep.equal(updatedUser);
+  });
 });
