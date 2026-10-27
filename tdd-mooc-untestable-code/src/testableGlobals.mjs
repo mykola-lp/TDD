@@ -49,6 +49,10 @@ export class PasswordService {
   async changePassword(userId, oldPassword, newPassword) {
     const user = await this.users.getById(userId);
 
+    if (!user) {
+      throw new Error("user not found");
+    }
+
     const isOldPasswordValid = argon2.verifySync(
       user.passwordHash,
       oldPassword,
