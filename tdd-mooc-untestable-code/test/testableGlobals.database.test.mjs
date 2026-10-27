@@ -59,4 +59,9 @@ describe("Testable globals: PostgresUserDao", () => {
 
     expect(savedUser).to.deep.equal(user);
   });
+
+  test("returns null when user does not exist", async () => {
+    const user = await userDao.getById(999);
+    expect(user).to.equal(null);
+  });
 });
