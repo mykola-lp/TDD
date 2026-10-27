@@ -62,4 +62,29 @@ describe("Testable globals: PasswordService", () => {
 
     expect(savedUser).to.equal(null);
   });
+
+  test("rejects password change when user does not exist", async () => {
+    let savedUser = null;
+
+    const users = {
+      async getById() {
+        return null;
+      },
+
+      async save(updatedUser) {
+        savedUser = { ...updatedUser };
+      },
+    };
+
+    const service = new PasswordService(users);
+
+    await assert.rejects(
+      service.changePassword(999, "old-password", "new-password"),
+      {
+        message: "user not found"
+      },
+    );
+
+    expect(savedUser).to.equal(null);
+  });
 });
