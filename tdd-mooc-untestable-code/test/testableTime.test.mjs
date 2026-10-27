@@ -19,4 +19,8 @@ describe("Testable time: days until Christmas", () => {
   test("returns 365 days when today is December 26 before a leap year", () => {
     expect(daysUntilChristmas(new Date(2023, 11, 26))).to.equal(365);
   });
+
+  test("returns 359 days when today is January 1 in a leap year", () => {
+    expect(daysUntilChristmas(new Date(2024, 0, 1))).to.equal(359);
+  });
 });
