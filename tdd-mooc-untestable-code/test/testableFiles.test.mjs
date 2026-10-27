@@ -1,13 +1,13 @@
 import { describe, test } from "vitest";
 import { expect } from "chai";
 
-import { parsePeopleCsv } from "../src/testableFiles.mjs";
+import { parsePeopleCsvContent } from "../src/testableFiles.mjs";
 
 describe("Testable files: parse people CSV", () => {
   test("parses a person from CSV text", () => {
     const csvData = "John,Doe,30,Male";
 
-    const people = parsePeopleCsv(csvData);
+    const people = parsePeopleCsvContent(csvData);
 
     expect(people).to.deep.equal([
       {
@@ -22,7 +22,7 @@ describe("Testable files: parse people CSV", () => {
   test("omits age when CSV age is empty", () => {
     const csvData = "Jane,Doe,,Female";
 
-    const people = parsePeopleCsv(csvData);
+    const people = parsePeopleCsvContent(csvData);
 
     expect(people).to.deep.equal([
       {
@@ -36,7 +36,7 @@ describe("Testable files: parse people CSV", () => {
   test("parses multiple people from CSV text", () => {
     const csvData = "John,Doe,30,Male\nJane,Smith,25,Female";
 
-    const people = parsePeopleCsv(csvData);
+    const people = parsePeopleCsvContent(csvData);
 
     expect(people).to.deep.equal([
       {
