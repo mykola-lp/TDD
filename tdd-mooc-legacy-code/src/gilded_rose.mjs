@@ -36,6 +36,24 @@ function updateQualityAfterSellByDate(item) {
   }
 }
 
+function updateQualityBeforeSellByDate(item) {
+  if (item.name != AGED_BRIE_NAME && item.name != BACKSTAGE_PASSES_NAME) {
+    decreaseQuality(item);
+  } else {
+    increaseQualityIfBelowMaximum(item);
+
+    if (item.name == BACKSTAGE_PASSES_NAME) {
+      if (item.sellIn < 11) {
+        increaseQualityIfBelowMaximum(item);
+      }
+
+      if (item.sellIn < 6) {
+        increaseQualityIfBelowMaximum(item);
+      }
+    }
+  }
+}
+
 export class Item {
   constructor(name, sellIn, quality) {
     this.name = name;
@@ -51,21 +69,7 @@ export class Shop {
 
   updateQuality() {
     for (const item of this.items) {
-      if (item.name != AGED_BRIE_NAME && item.name != BACKSTAGE_PASSES_NAME) {
-        decreaseQuality(item);
-      } else {
-        increaseQualityIfBelowMaximum(item);
-
-        if (item.name == BACKSTAGE_PASSES_NAME) {
-          if (item.sellIn < 11) {
-            increaseQualityIfBelowMaximum(item);
-          }
-
-          if (item.sellIn < 6) {
-            increaseQualityIfBelowMaximum(item);
-          }
-        }
-      }
+      updateQualityBeforeSellByDate(item);
       decreaseSellIn(item);
 
       if (item.sellIn < 0) {
