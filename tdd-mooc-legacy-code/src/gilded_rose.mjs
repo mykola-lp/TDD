@@ -32,9 +32,7 @@ export class Shop {
   }
 
   updateQuality() {
-    for (let i = 0; i < this.items.length; i++) {
-      const item = this.items[i];
-
+    for (const item of this.items) {
       if (item.name != AGED_BRIE_NAME && item.name != BACKSTAGE_PASSES_NAME) {
         decreaseQuality(item);
       } else {
