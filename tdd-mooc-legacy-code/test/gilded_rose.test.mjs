@@ -142,4 +142,11 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).to.equal(-1);
     expect(items[0].quality).to.equal(50);
   });
+
+  test("creates an empty shop by default", () => {
+    const gildedRose = new Shop();
+    const items = gildedRose.updateQuality();
+
+    expect(items).to.deep.equal([]);
+  });
 });
