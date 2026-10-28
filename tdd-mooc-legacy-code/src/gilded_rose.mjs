@@ -51,7 +51,7 @@ export class Shop {
         }
       }
       if (item.name != SULFURAS_NAME) {
-        item.sellIn = item.sellIn - 1;
+        item.sellIn -= 1;
       }
       if (item.sellIn < 0) {
         if (item.name != AGED_BRIE_NAME) {
