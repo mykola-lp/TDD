@@ -58,7 +58,7 @@ export class Shop {
           if (item.name != BACKSTAGE_PASSES_NAME) {
             decreaseQuality(item);
           } else {
-            item.quality = item.quality - item.quality;
+            item.quality = 0;
           }
         } else {
           increaseQualityIfBelowMaximum(item);
