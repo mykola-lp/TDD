@@ -13,4 +13,13 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).to.equal(0);
     expect(items[0].quality).to.equal(1);
   });
+
+  test("decreases quality twice after sell-by date", () => {
+    const gildedRose = new Shop([new Item("foo", 0, 2)]);
+
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].sellIn).to.equal(-1);
+    expect(items[0].quality).to.equal(0);
+  });
 });
