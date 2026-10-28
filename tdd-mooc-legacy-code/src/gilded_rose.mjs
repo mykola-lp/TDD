@@ -10,8 +10,14 @@ function decreaseQuality(item) {
     return;
   }
 
-  const degradation = item.name.startsWith(CONJURED_PREFIX) ? 2 : 1;
-  item.quality = Math.max(0, item.quality - degradation);
+  let qualityDecrease = 1;
+
+  if (item.name.startsWith(CONJURED_PREFIX)) {
+    qualityDecrease = 2;
+  }
+
+  const updatedQuality = item.quality - qualityDecrease;
+  item.quality = Math.max(0, updatedQuality);
 }
 
 function decreaseSellIn(item) {
