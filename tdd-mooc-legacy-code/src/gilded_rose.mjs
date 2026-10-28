@@ -12,6 +12,12 @@ function decreaseQuality(item) {
   }
 }
 
+function increaseQualityIfBelowMaximum(item) {
+  if (item.quality < MAX_QUALITY) {
+    item.quality += 1;
+  }
+}
+
 export class Item {
   constructor(name, sellIn, quality) {
     this.name = name;
@@ -32,20 +38,15 @@ export class Shop {
       if (item.name != AGED_BRIE_NAME && item.name != BACKSTAGE_PASSES_NAME) {
         decreaseQuality(item);
       } else {
-        if (item.quality < MAX_QUALITY) {
-          item.quality = item.quality + 1;
+        increaseQualityIfBelowMaximum(item);
 
-          if (item.name == BACKSTAGE_PASSES_NAME) {
-            if (item.sellIn < 11) {
-              if (item.quality < MAX_QUALITY) {
-                item.quality = item.quality + 1;
-              }
-            }
-            if (item.sellIn < 6) {
-              if (item.quality < MAX_QUALITY) {
-                item.quality = item.quality + 1;
-              }
-            }
+        if (item.name == BACKSTAGE_PASSES_NAME) {
+          if (item.sellIn < 11) {
+            increaseQualityIfBelowMaximum(item);
+          }
+
+          if (item.sellIn < 6) {
+            increaseQualityIfBelowMaximum(item);
           }
         }
       }
@@ -60,9 +61,7 @@ export class Shop {
             item.quality = item.quality - item.quality;
           }
         } else {
-          if (item.quality < MAX_QUALITY) {
-            item.quality = item.quality + 1;
-          }
+          increaseQualityIfBelowMaximum(item);
         }
       }
     }
