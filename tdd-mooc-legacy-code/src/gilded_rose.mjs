@@ -38,22 +38,28 @@ function updateQualityAfterSellByDate(item) {
   decreaseQuality(item);
 }
 
+function updateBackstagePassQuality(item) {
+  increaseQualityIfBelowMaximum(item);
+
+  if (item.sellIn < 11) {
+    increaseQualityIfBelowMaximum(item);
+  }
+
+  if (item.sellIn < 6) {
+    increaseQualityIfBelowMaximum(item);
+  }
+}
+
 function updateQualityBeforeSellByDate(item) {
   if (item.name != AGED_BRIE_NAME && item.name != BACKSTAGE_PASSES_NAME) {
     decreaseQuality(item);
     return;
   }
 
-  increaseQualityIfBelowMaximum(item);
-
   if (item.name == BACKSTAGE_PASSES_NAME) {
-    if (item.sellIn < 11) {
-      increaseQualityIfBelowMaximum(item);
-    }
-
-    if (item.sellIn < 6) {
-      increaseQualityIfBelowMaximum(item);
-    }
+    updateBackstagePassQuality(item);
+  } else {
+    increaseQualityIfBelowMaximum(item);
   }
 }
 
