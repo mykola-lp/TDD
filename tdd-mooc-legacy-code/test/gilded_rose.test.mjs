@@ -149,4 +149,12 @@ describe("Gilded Rose", () => {
 
     expect(items).to.deep.equal([]);
   });
+
+  test("decreases Conjured item quality twice as fast", () => {
+    const gildedRose = new Shop([new Item("Conjured Mana Cake", 3, 10)]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].sellIn).to.equal(2);
+    expect(items[0].quality).to.equal(8);
+  });
 });
