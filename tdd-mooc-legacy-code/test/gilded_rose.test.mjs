@@ -33,9 +33,7 @@ describe("Gilded Rose", () => {
   });
 
   test("increases backstage passes quality by 2 within 10 days", () => {
-    const gildedRose = new Shop([
-      new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10),
-    ]);
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 10, 10)]);
 
     const items = gildedRose.updateQuality();
 
@@ -44,9 +42,7 @@ describe("Gilded Rose", () => {
   });
 
   test("drops backstage passes quality to zero after the concert", () => {
-    const gildedRose = new Shop([
-      new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10),
-    ]);
+    const gildedRose = new Shop([new Item("Backstage passes to a TAFKAL80ETC concert", 0, 10)]);
 
     const items = gildedRose.updateQuality();
 
