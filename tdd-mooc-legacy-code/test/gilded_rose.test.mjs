@@ -118,4 +118,12 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).to.equal(-1);
     expect(items[0].quality).to.equal(80);
   });
+
+  test("does not decrease quality below zero after sell-by date", () => {
+    const gildedRose = new Shop([new Item("foo", 0, 1)]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].sellIn).to.equal(-1);
+    expect(items[0].quality).to.equal(0);
+  });
 });
