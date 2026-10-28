@@ -12,6 +12,12 @@ function decreaseQuality(item) {
   }
 }
 
+function decreaseSellIn(item) {
+  if (item.name != SULFURAS_NAME) {
+    item.sellIn -= 1;
+  }
+}
+
 function increaseQualityIfBelowMaximum(item) {
   if (item.quality < MAX_QUALITY) {
     item.quality += 1;
@@ -48,9 +54,8 @@ export class Shop {
           }
         }
       }
-      if (item.name != SULFURAS_NAME) {
-        item.sellIn -= 1;
-      }
+      decreaseSellIn(item);
+
       if (item.sellIn < 0) {
         if (item.name != AGED_BRIE_NAME) {
           if (item.name != BACKSTAGE_PASSES_NAME) {
