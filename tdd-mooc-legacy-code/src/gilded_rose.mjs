@@ -24,6 +24,18 @@ function increaseQualityIfBelowMaximum(item) {
   }
 }
 
+function updateQualityAfterSellByDate(item) {
+  if (item.name != AGED_BRIE_NAME) {
+    if (item.name != BACKSTAGE_PASSES_NAME) {
+      decreaseQuality(item);
+    } else {
+      item.quality = 0;
+    }
+  } else {
+    increaseQualityIfBelowMaximum(item);
+  }
+}
+
 export class Item {
   constructor(name, sellIn, quality) {
     this.name = name;
@@ -57,15 +69,7 @@ export class Shop {
       decreaseSellIn(item);
 
       if (item.sellIn < 0) {
-        if (item.name != AGED_BRIE_NAME) {
-          if (item.name != BACKSTAGE_PASSES_NAME) {
-            decreaseQuality(item);
-          } else {
-            item.quality = 0;
-          }
-        } else {
-          increaseQualityIfBelowMaximum(item);
-        }
+        updateQualityAfterSellByDate(item);
       }
     }
 
