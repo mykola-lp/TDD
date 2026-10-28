@@ -126,4 +126,12 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).to.equal(-1);
     expect(items[0].quality).to.equal(0);
   });
+
+  test("increases Aged Brie quality twice after sell-by date", () => {
+    const gildedRose = new Shop([new Item("Aged Brie", 0, 10)]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].sellIn).to.equal(-1);
+    expect(items[0].quality).to.equal(12);
+  });
 });
