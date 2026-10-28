@@ -49,4 +49,11 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).to.equal(-1);
     expect(items[0].quality).to.equal(0);
   });
+
+  test("does not decrease quality below zero", () => {
+    const gildedRose = new Shop([new Item("foo", 5, 0)]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].quality).to.equal(0);
+  });
 });
