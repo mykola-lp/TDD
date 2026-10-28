@@ -53,11 +53,7 @@ export class Shop {
       if (item.sellIn < 0) {
         if (item.name != AGED_BRIE_NAME) {
           if (item.name != BACKSTAGE_PASSES_NAME) {
-            if (item.quality > 0) {
-              if (item.name != SULFURAS_NAME) {
-                item.quality -= 1;
-              }
-            }
+            decreaseQuality(item);
           } else {
             item.quality = item.quality - item.quality;
           }
