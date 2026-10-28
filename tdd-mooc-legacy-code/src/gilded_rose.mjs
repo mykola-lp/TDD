@@ -2,6 +2,14 @@ const AGED_BRIE_NAME = "Aged Brie";
 const BACKSTAGE_PASSES_NAME = "Backstage passes to a TAFKAL80ETC concert";
 const SULFURAS_NAME = "Sulfuras, Hand of Ragnaros";
 
+function decreaseQuality(item) {
+  if (item.quality > 0) {
+    if (item.name != SULFURAS_NAME) {
+      item.quality -= 1;
+    }
+  }
+}
+
 export class Item {
   constructor(name, sellIn, quality) {
     this.name = name;
@@ -20,11 +28,7 @@ export class Shop {
       const item = this.items[i];
 
       if (item.name != AGED_BRIE_NAME && item.name != BACKSTAGE_PASSES_NAME) {
-        if (item.quality > 0) {
-          if (item.name != SULFURAS_NAME) {
-            item.quality -= 1;
-          }
-        }
+        decreaseQuality(item);
       } else {
         if (item.quality < 50) {
           item.quality = item.quality + 1;
