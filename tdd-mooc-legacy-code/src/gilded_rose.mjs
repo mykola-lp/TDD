@@ -25,15 +25,17 @@ function increaseQualityIfBelowMaximum(item) {
 }
 
 function updateQualityAfterSellByDate(item) {
-  if (item.name != AGED_BRIE_NAME) {
-    if (item.name != BACKSTAGE_PASSES_NAME) {
-      decreaseQuality(item);
-    } else {
-      item.quality = 0;
-    }
-  } else {
+  if (item.name == AGED_BRIE_NAME) {
     increaseQualityIfBelowMaximum(item);
+    return;
   }
+
+  if (item.name == BACKSTAGE_PASSES_NAME) {
+    item.quality = 0;
+    return;
+  }
+
+  decreaseQuality(item);
 }
 
 function updateQualityBeforeSellByDate(item) {
