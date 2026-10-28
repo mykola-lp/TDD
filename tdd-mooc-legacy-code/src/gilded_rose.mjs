@@ -20,7 +20,7 @@ export class Shop {
       if (this.items[i].name != AGED_BRIE_NAME && this.items[i].name != BACKSTAGE_PASSES_NAME) {
         if (this.items[i].quality > 0) {
           if (this.items[i].name != SULFURAS_NAME) {
-            this.items[i].quality = this.items[i].quality - 1;
+            this.items[i].quality -= 1;
           }
         }
       } else {
@@ -48,7 +48,7 @@ export class Shop {
           if (this.items[i].name != BACKSTAGE_PASSES_NAME) {
             if (this.items[i].quality > 0) {
               if (this.items[i].name != SULFURAS_NAME) {
-                this.items[i].quality = this.items[i].quality - 1;
+                this.items[i].quality -= 1;
               }
             }
           } else {
