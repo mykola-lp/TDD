@@ -165,4 +165,12 @@ describe("Gilded Rose", () => {
     expect(items[0].sellIn).to.equal(2);
     expect(items[0].quality).to.equal(0);
   });
+
+  test("decreases Conjured quality by four after sell-by date", () => {
+    const gildedRose = new Shop([new Item("Conjured Mana Cake", 0, 10)]);
+    const items = gildedRose.updateQuality();
+
+    expect(items[0].sellIn).to.equal(-1);
+    expect(items[0].quality).to.equal(6);
+  });
 });
