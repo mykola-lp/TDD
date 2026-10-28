@@ -1,13 +1,15 @@
 const AGED_BRIE_NAME = "Aged Brie";
 const BACKSTAGE_PASSES_NAME = "Backstage passes to a TAFKAL80ETC concert";
 const SULFURAS_NAME = "Sulfuras, Hand of Ragnaros";
+const CONJURED_PREFIX = "Conjured ";
 
 const MAX_QUALITY = 50;
 
 function decreaseQuality(item) {
   if (item.quality > 0) {
     if (item.name != SULFURAS_NAME) {
-      item.quality -= 1;
+      const degradation = item.name.startsWith(CONJURED_PREFIX) ? 2 : 1;
+      item.quality = Math.max(0, item.quality - degradation);
     }
   }
 }
