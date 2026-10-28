@@ -51,16 +51,17 @@ function updateBackstagePassQuality(item) {
 }
 
 function updateQualityBeforeSellByDate(item) {
-  if (item.name != AGED_BRIE_NAME && item.name != BACKSTAGE_PASSES_NAME) {
-    decreaseQuality(item);
+  if (item.name == BACKSTAGE_PASSES_NAME) {
+    updateBackstagePassQuality(item);
     return;
   }
 
-  if (item.name == BACKSTAGE_PASSES_NAME) {
-    updateBackstagePassQuality(item);
-  } else {
+  if (item.name == AGED_BRIE_NAME) {
     increaseQualityIfBelowMaximum(item);
+    return;
   }
+
+  decreaseQuality(item);
 }
 
 export class Item {
