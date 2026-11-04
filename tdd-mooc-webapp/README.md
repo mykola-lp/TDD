@@ -45,3 +45,4 @@ Destroy all containers and data
 Run end-to-end tests
 
     ./end-to-end-test.sh
+
