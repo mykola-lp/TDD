@@ -165,13 +165,19 @@ function serializeRle(cells) {
 }
 
 const inputPath = process.argv[2];
-const generationCount = Number(process.argv[3]);
+const generationCountArgument = process.argv[3];
+const generationCount = Number(generationCountArgument);
 
-const input = readFileSync(inputPath, "utf8");
-let cells = parseRle(input);
+if (!generationCountArgument?.trim() || !Number.isInteger(generationCount) || generationCount < 0) {
+  process.stderr.write("Generation count must be a non-negative integer.\n");
+  process.exitCode = 1;
+} else {
+  const input = readFileSync(inputPath, "utf8");
+  let cells = parseRle(input);
 
-for (let i = 0; i < generationCount; i++) {
-  cells = nextGeneration(cells);
+  for (let i = 0; i < generationCount; i++) {
+    cells = nextGeneration(cells);
+  }
+
+  process.stdout.write(`${serializeRle(cells)}\n`);
 }
-
-process.stdout.write(`${serializeRle(cells)}\n`);
