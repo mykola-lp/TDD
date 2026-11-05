@@ -14,13 +14,14 @@ function parseRle(input) {
 
   const header = lines[headerIndex];
 
-  const declaredWidth = Number(header.match(/^x\s*=\s*(\d+)/i)[1]);
-
   const validHeader = /^x\s*=\s*\d+\s*,\s*y\s*=\s*\d+(?:\s*,\s*rule\s*=\s*[^,]+)?$/i.test(header);
 
   if (!validHeader) {
     throw new Error("Invalid RLE header");
   }
+
+  const declaredWidth = Number(header.match(/^x\s*=\s*(\d+)/i)[1]);
+  const declaredHeight = Number(header.match(/,\s*y\s*=\s*(\d+)/i)[1]);
 
   const data = lines
     .slice(headerIndex + 1)
@@ -46,6 +47,10 @@ function parseRle(input) {
 
     if ((symbol === "b" || symbol === "o") && x + count > declaredWidth) {
       throw new Error("RLE data exceeds declared width");
+    }
+
+    if ((symbol === "b" || symbol === "o") && y >= declaredHeight) {
+      throw new Error("RLE data exceeds declared height");
     }
 
     if (count < 1) {
