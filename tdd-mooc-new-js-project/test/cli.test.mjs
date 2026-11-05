@@ -271,4 +271,23 @@ describe("Game of Life CLI", () => {
       rmSync(directory, { recursive: true, force: true });
     }
   });
+
+  test("outputs a glider after three generations", () => {
+    const directory = mkdtempSync(join(tmpdir(), "game-of-life-"));
+    const inputPath = join(directory, "glider.rle");
+
+    try {
+      writeFileSync(inputPath, "x = 3, y = 3\nbo$2bo$3o!\n");
+
+      const result = spawnSync(process.execPath, [cliPath, inputPath, "3"], {
+        encoding: "utf8",
+      });
+
+      expect(result.error).to.equal(undefined);
+      expect(result.status).to.equal(0);
+      expect(result.stdout.trim()).to.equal("x = 3, y = 3\no$b2o$2o!");
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
 });
