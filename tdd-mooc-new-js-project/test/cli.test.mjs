@@ -102,4 +102,15 @@ describe("Game of Life CLI", () => {
       rmSync(directory, { recursive: true, force: true });
     }
   });
+
+  test("shows usage when required arguments are missing", () => {
+    const result = spawnSync(process.execPath, [cliPath], {
+      encoding: "utf8",
+    });
+
+    expect(result.error).to.equal(undefined);
+    expect(result.status).to.equal(1);
+    expect(result.stdout).to.equal("");
+    expect(result.stderr.trim()).to.equal("Usage: node cli.mjs <input-file> <generation-count>");
+  });
 });
