@@ -69,6 +69,10 @@ function parseRle(input) {
         x++;
       }
     } else if (symbol === "$") {
+      if (y + count >= declaredHeight) {
+        throw new Error("RLE data exceeds declared height");
+      }
+
       y += count;
       x = 0;
     } else if (symbol === "!") {
