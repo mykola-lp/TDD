@@ -14,6 +14,8 @@ function parseRle(input) {
 
   const header = lines[headerIndex];
 
+  const declaredWidth = Number(header.match(/^x\s*=\s*(\d+)/i)[1]);
+
   const validHeader = /^x\s*=\s*\d+\s*,\s*y\s*=\s*\d+(?:\s*,\s*rule\s*=\s*[^,]+)?$/i.test(header);
 
   if (!validHeader) {
@@ -41,6 +43,10 @@ function parseRle(input) {
 
     const count = countText ? Number(countText) : 1;
     const symbol = data[index++];
+
+    if ((symbol === "b" || symbol === "o") && x + count > declaredWidth) {
+      throw new Error("RLE data exceeds declared width");
+    }
 
     if (count < 1) {
       throw new Error("Invalid RLE run length");
