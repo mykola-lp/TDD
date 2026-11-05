@@ -12,6 +12,14 @@ function parseRle(input) {
     throw new Error("Invalid RLE header");
   }
 
+  const header = lines[headerIndex];
+
+  const validHeader = /^x\s*=\s*\d+\s*,\s*y\s*=\s*\d+(?:\s*,\s*rule\s*=\s*[^,]+)?$/i.test(header);
+
+  if (!validHeader) {
+    throw new Error("Invalid RLE header");
+  }
+
   const data = lines
     .slice(headerIndex + 1)
     .join("")
