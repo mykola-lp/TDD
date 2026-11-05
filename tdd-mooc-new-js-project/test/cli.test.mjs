@@ -63,4 +63,23 @@ describe("Game of Life CLI", () => {
       rmSync(directory, { recursive: true, force: true });
     }
   });
+
+  test("rejects a non-numeric generation count", () => {
+    const directory = mkdtempSync(join(tmpdir(), "game-of-life-"));
+    const inputPath = join(directory, "block.rle");
+
+    try {
+      writeFileSync(inputPath, "x = 2, y = 2\n2o$2o!\n");
+
+      const result = spawnSync(process.execPath, [cliPath, inputPath, "abc"], {
+        encoding: "utf8",
+      });
+
+      expect(result.error).to.equal(undefined);
+      expect(result.status).to.equal(1);
+      expect(result.stderr.trim()).to.equal("Generation count must be a non-negative integer.");
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
 });
