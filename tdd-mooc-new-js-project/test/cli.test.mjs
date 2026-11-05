@@ -26,4 +26,21 @@ describe("Game of Life CLI", () => {
       rmSync(directory, { recursive: true, force: true });
     }
   });
+
+  test("outputs a vertical blinker after one generation", () => {
+    const directory = mkdtempSync(join(tmpdir(), "game-of-life-"));
+    const inputPath = join(directory, "blinker.rle");
+
+    try {
+      writeFileSync(inputPath, "x = 3, y = 1\n3o!\n");
+
+      const result = spawnSync(process.execPath, [cliPath, inputPath, "1"], { encoding: "utf8" });
+
+      expect(result.error).to.equal(undefined);
+      expect(result.status).to.equal(0);
+      expect(result.stdout.trim()).to.equal("x = 1, y = 3\no$o$o!");
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
 });
