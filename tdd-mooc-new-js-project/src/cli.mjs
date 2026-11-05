@@ -168,7 +168,10 @@ const inputPath = process.argv[2];
 const generationCountArgument = process.argv[3];
 const generationCount = Number(generationCountArgument);
 
-if (!generationCountArgument?.trim() || !Number.isInteger(generationCount) || generationCount < 0) {
+if (!inputPath || !generationCountArgument?.trim()) {
+  process.stderr.write("Usage: node cli.mjs <input-file> <generation-count>\n");
+  process.exitCode = 1;
+} else if (!Number.isInteger(generationCount) || generationCount < 0) {
   process.stderr.write("Generation count must be a non-negative integer.\n");
   process.exitCode = 1;
 } else {
