@@ -57,6 +57,10 @@ function parseRle(input) {
       throw new Error("Invalid RLE run length");
     }
 
+    if (symbol === "!" && countText) {
+      throw new Error("Invalid RLE data");
+    }
+
     if (symbol === "b") {
       x += count;
     } else if (symbol === "o") {
