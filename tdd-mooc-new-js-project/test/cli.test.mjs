@@ -251,4 +251,24 @@ describe("Game of Life CLI", () => {
       rmSync(directory, { recursive: true, force: true });
     }
   });
+
+  test("rejects an unsupported RLE rule", () => {
+    const directory = mkdtempSync(join(tmpdir(), "game-of-life-"));
+    const inputPath = join(directory, "highlife.rle");
+
+    try {
+      writeFileSync(inputPath, "x = 3, y = 1, rule = B36/S23\n3o!\n");
+
+      const result = spawnSync(process.execPath, [cliPath, inputPath, "1"], {
+        encoding: "utf8",
+      });
+
+      expect(result.error).to.equal(undefined);
+      expect(result.status).to.equal(1);
+      expect(result.stdout).to.equal("");
+      expect(result.stderr.trim()).to.equal("Unsupported RLE rule: B36/S23");
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
 });
