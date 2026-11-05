@@ -153,4 +153,24 @@ describe("Game of Life CLI", () => {
       rmSync(directory, { recursive: true, force: true });
     }
   });
+
+  test("rejects RLE data taller than declared height", () => {
+    const directory = mkdtempSync(join(tmpdir(), "game-of-life-"));
+    const inputPath = join(directory, "invalid-height.rle");
+
+    try {
+      writeFileSync(inputPath, "x = 1, y = 2\no$o$o!");
+
+      const result = spawnSync(process.execPath, [cliPath, inputPath, "0"], {
+        encoding: "utf8",
+      });
+
+      expect(result.error).to.equal(undefined);
+      expect(result.status).to.equal(1);
+      expect(result.stdout).to.equal("");
+      expect(result.stderr.trim()).to.equal("RLE data exceeds declared height");
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
 });
