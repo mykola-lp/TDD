@@ -22,12 +22,12 @@ function initGame() {
   game.tetrominoes = new ShuffleBag([
     Tetromino.I_SHAPE,
     Tetromino.T_SHAPE,
-    Tetromino.L_SHAPE,
-    Tetromino.J_SHAPE,
-    Tetromino.T_SHAPE,
-    Tetromino.S_SHAPE,
-    Tetromino.Z_SHAPE,
     Tetromino.O_SHAPE,
+    // Disabled until these tetrominoes are implemented in Tetromino.mjs
+    // Because it causes an issue where no new pieces appear after 3 pieces
+    // Tetromino.S_SHAPE,
+    // Tetromino.Z_SHAPE,
+    // Tetromino.J_SHAPE,
   ]);
 
   document.addEventListener("keydown", (event) => {
@@ -107,11 +107,12 @@ function renderGame(game, canvas, timestamp) {
   const canvasHeight = (canvas.height = canvas.clientHeight);
   const cellWidth = canvasWidth / game.columns;
   const cellHeight = canvasHeight / game.rows;
+  const rows = game.board.toString().trim().split("\n");
 
   drawBackground(ctx, canvasWidth, canvasHeight);
   for (let row = 0; row < game.rows; row++) {
     for (let column = 0; column < game.columns; column++) {
-      const cell = game.board.cellAt(row, column);
+      const cell = rows[row][column];
       drawCell(ctx, { cell, row, column, cellWidth, cellHeight });
     }
   }
