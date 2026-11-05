@@ -113,4 +113,24 @@ describe("Game of Life CLI", () => {
     expect(result.stdout).to.equal("");
     expect(result.stderr.trim()).to.equal("Usage: node cli.mjs <input-file> <generation-count>");
   });
+
+  test("rejects an RLE header without height", () => {
+    const directory = mkdtempSync(join(tmpdir(), "game-of-life-"));
+    const inputPath = join(directory, "invalid-header.rle");
+
+    try {
+      writeFileSync(inputPath, "x = 3\n3o!\n");
+
+      const result = spawnSync(process.execPath, [cliPath, inputPath, "1"], {
+        encoding: "utf8",
+      });
+
+      expect(result.error).to.equal(undefined);
+      expect(result.status).to.equal(1);
+      expect(result.stdout).to.equal("");
+      expect(result.stderr.trim()).to.equal("Invalid RLE header");
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
 });
