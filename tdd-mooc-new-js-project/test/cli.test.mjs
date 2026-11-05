@@ -173,4 +173,24 @@ describe("Game of Life CLI", () => {
       rmSync(directory, { recursive: true, force: true });
     }
   });
+
+  test("rejects RLE data after the terminator", () => {
+    const directory = mkdtempSync(join(tmpdir(), "game-of-life-"));
+    const inputPath = join(directory, "trailing-data.rle");
+
+    try {
+      writeFileSync(inputPath, "x = 3, y = 1\n3o!b");
+
+      const result = spawnSync(process.execPath, [cliPath, inputPath, "0"], {
+        encoding: "utf8",
+      });
+
+      expect(result.error).to.equal(undefined);
+      expect(result.status).to.equal(1);
+      expect(result.stdout).to.equal("");
+      expect(result.stderr.trim()).to.equal("Unexpected data after RLE terminator");
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
 });
