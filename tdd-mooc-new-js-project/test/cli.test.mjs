@@ -193,4 +193,24 @@ describe("Game of Life CLI", () => {
       rmSync(directory, { recursive: true, force: true });
     }
   });
+
+  test("rejects a run length before the RLE terminator", () => {
+    const directory = mkdtempSync(join(tmpdir(), "game-of-life-"));
+    const inputPath = join(directory, "invalid-terminator.rle");
+
+    try {
+      writeFileSync(inputPath, "x = 1, y = 1\n2!\n");
+
+      const result = spawnSync(process.execPath, [cliPath, inputPath, "0"], {
+        encoding: "utf8",
+      });
+
+      expect(result.error).to.equal(undefined);
+      expect(result.status).to.equal(1);
+      expect(result.stdout).to.equal("");
+      expect(result.stderr.trim()).to.equal("Invalid RLE data");
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
 });
