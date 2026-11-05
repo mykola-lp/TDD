@@ -68,6 +68,10 @@ function parseRle(input) {
       y += count;
       x = 0;
     } else if (symbol === "!") {
+      if (index < data.length) {
+        throw new Error("Unexpected data after RLE terminator");
+      }
+
       ended = true;
       break;
     } else {
