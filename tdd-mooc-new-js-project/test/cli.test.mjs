@@ -82,4 +82,24 @@ describe("Game of Life CLI", () => {
       rmSync(directory, { recursive: true, force: true });
     }
   });
+
+  test("reports an error when RLE data has no terminator", () => {
+    const directory = mkdtempSync(join(tmpdir(), "game-of-life-"));
+    const inputPath = join(directory, "invalid.rle");
+
+    try {
+      writeFileSync(inputPath, "x = 3, y = 1\n3o\n");
+
+      const result = spawnSync(process.execPath, [cliPath, inputPath, "1"], {
+        encoding: "utf8",
+      });
+
+      expect(result.error).to.equal(undefined);
+      expect(result.status).to.equal(1);
+      expect(result.stdout).to.equal("");
+      expect(result.stderr.trim()).to.equal("Missing RLE terminator");
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
 });
