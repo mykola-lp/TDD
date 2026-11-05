@@ -233,4 +233,22 @@ describe("Game of Life CLI", () => {
       rmSync(directory, { recursive: true, force: true });
     }
   });
+
+  test("reports an error when the input file does not exist", () => {
+    const directory = mkdtempSync(join(tmpdir(), "game-of-life-"));
+    const inputPath = join(directory, "missing.rle");
+
+    try {
+      const result = spawnSync(process.execPath, [cliPath, inputPath, "1"], {
+        encoding: "utf8",
+      });
+
+      expect(result.error).to.equal(undefined);
+      expect(result.status).to.equal(1);
+      expect(result.stdout).to.equal("");
+      expect(result.stderr.trim()).to.equal("Input file not found");
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
 });
