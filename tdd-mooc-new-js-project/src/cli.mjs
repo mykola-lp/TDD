@@ -216,7 +216,11 @@ if (!inputPath || !generationCountArgument?.trim()) {
 
     process.stdout.write(`${serializeRle(cells)}\n`);
   } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
+    let message = error instanceof Error ? error.message : String(error);
+
+    if (error?.code === "ENOENT") {
+      message = "Input file not found";
+    }
 
     process.stderr.write(`${message}\n`);
     process.exitCode = 1;
