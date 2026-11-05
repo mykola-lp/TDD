@@ -172,12 +172,19 @@ if (!generationCountArgument?.trim() || !Number.isInteger(generationCount) || ge
   process.stderr.write("Generation count must be a non-negative integer.\n");
   process.exitCode = 1;
 } else {
-  const input = readFileSync(inputPath, "utf8");
-  let cells = parseRle(input);
+  try {
+    const input = readFileSync(inputPath, "utf8");
+    let cells = parseRle(input);
 
-  for (let i = 0; i < generationCount; i++) {
-    cells = nextGeneration(cells);
+    for (let i = 0; i < generationCount; i++) {
+      cells = nextGeneration(cells);
+    }
+
+    process.stdout.write(`${serializeRle(cells)}\n`);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+
+    process.stderr.write(`${message}\n`);
+    process.exitCode = 1;
   }
-
-  process.stdout.write(`${serializeRle(cells)}\n`);
 }
