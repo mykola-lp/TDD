@@ -43,4 +43,24 @@ describe("Game of Life CLI", () => {
       rmSync(directory, { recursive: true, force: true });
     }
   });
+
+  test("wraps RLE output at 70 characters", () => {
+    const directory = mkdtempSync(join(tmpdir(), "game-of-life-"));
+    const inputPath = join(directory, "long-pattern.rle");
+    const pattern = "ob".repeat(35) + "o";
+
+    try {
+      writeFileSync(inputPath, `x = 71, y = 1\n${pattern.slice(0, 70)}\n${pattern.slice(70)}!\n`);
+
+      const result = spawnSync(process.execPath, [cliPath, inputPath, "0"], {
+        encoding: "utf8",
+      });
+
+      expect(result.error).to.equal(undefined);
+      expect(result.status).to.equal(0);
+      expect(result.stdout.trim()).to.equal(`x = 71, y = 1\n${"ob".repeat(35)}\no!`);
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
 });
