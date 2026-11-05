@@ -20,6 +20,13 @@ function parseRle(input) {
     throw new Error("Invalid RLE header");
   }
 
+  const ruleMatch = header.match(/,\s*rule\s*=\s*([^,]+)/i);
+  const rule = ruleMatch?.[1].trim();
+
+  if (rule && rule.toUpperCase() !== "B3/S23") {
+    throw new Error(`Unsupported RLE rule: ${rule}`);
+  }
+
   const declaredWidth = Number(header.match(/^x\s*=\s*(\d+)/i)[1]);
   const declaredHeight = Number(header.match(/,\s*y\s*=\s*(\d+)/i)[1]);
 
