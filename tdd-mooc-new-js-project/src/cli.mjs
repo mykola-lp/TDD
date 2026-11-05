@@ -113,6 +113,27 @@ function encodeRuns(row) {
   return result;
 }
 
+function wrapRleBody(body) {
+  const tokens = body.match(/\d*[bo$]|!/g) ?? [];
+  const lines = [];
+  let line = "";
+
+  for (const token of tokens) {
+    if (line && line.length + token.length > 70) {
+      lines.push(line);
+      line = "";
+    }
+
+    line += token;
+  }
+
+  if (line) {
+    lines.push(line);
+  }
+
+  return lines.join("\n");
+}
+
 function serializeRle(cells) {
   if (cells.size === 0) {
     return "x = 0, y = 0\n!";
@@ -138,7 +159,9 @@ function serializeRle(cells) {
     rows.push(encodeRuns(row));
   }
 
-  return `x = ${maxX - minX + 1}, y = ${maxY - minY + 1}\n${rows.join("$")}!`;
+  const body = `${rows.join("$")}!`;
+
+  return `x = ${maxX - minX + 1}, y = ${maxY - minY + 1}\n${wrapRleBody(body)}`;
 }
 
 const inputPath = process.argv[2];
